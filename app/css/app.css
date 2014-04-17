@@ -1,0 +1,4 @@
+/* fix for angular-ui-bootstrap */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.content{ margin-top: 55px; }
