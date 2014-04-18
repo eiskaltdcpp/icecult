@@ -131,7 +131,18 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', ['$http', function($http)
 			return jsonrpc('queue.matchlists');
 		},
 		ListHubsFullDesc: function() {
-			return jsonrpc('hub.listfulldesc');
+            var promise = jsonrpc('hub.listfulldesc');
+            promise.success = function(fn) {
+			    promise.then(function(response) {
+                    // transform from object with url as key to array
+                    var hubs = [];
+                    angular.forEach(response.data.result, function(value, key) {
+                        hubs.push(angular.extend(value, {huburl: key}));
+                    });
+                    fn(hubs);
+                });
+		    };
+            return promise;
 		},
 		GetHubUserList: function(huburl) {
 			return jsonrpc('hub.getusers', {huburl: huburl, separator: '#'}, true);

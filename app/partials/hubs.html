@@ -1,5 +1,65 @@
 <tabset>
-    <tab ng-repeat="hub in hubs" heading="{{ hub.hubname }}">
-        {{ hub.description }}
+    <tab heading="{{ hub.hubname }}" active="$first" ng-repeat="hub in hubs" ng-controller="HubCtrl">
+        <alert ng-hide="hub.connected">
+            Not connected to <strong>{{ hub.huburl }}</strong>. Just added? Reload the page again.
+            Maybe you should look into daemon's log.
+        </alert>
+        <div class="row" ng-show="hub.connected">
+            <ul class="list-group col-sm-3 col-sm-push-9">
+                <li class="list-group-item">
+                    <span class="badge">3.4 TB</span>
+                    lars
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">3.4 TB</span>
+                    lars
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">3.4 TB</span>
+                    lars
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">3.4 TB</span>
+                    lars
+                </li>
+            </ul>
+            <div class="col-sm-9 col-sm-pull-3">
+                <div class="row">
+                    <ul class="chat col-sm-12">
+                        <p class="fadeout"></p>
+                        <li>[00:01] hannes: Lalelu, jemand da?</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li>[00:11] wayne: nope!, schnauze!</li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Submit</button>
+                      </span>
+                        <input type="text" class="form-control" placeholder="a chat message">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-danger" type="button" ng-click="disconnect(hub.huburl)">Disconnect</button>
+        </div>
+    </tab>
+    <tab heading="+">
+        <form role="form">
+            <input type="text" class="form-control" ng-model="newHubUrl">
+            <button type="button" class="btn btn-primary" ng-click="connect(newHubUrl)">Connect</button>
+        </form>
     </tab>
 </tabset>

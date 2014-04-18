@@ -1,4 +1,34 @@
 /* fix for angular-ui-bootstrap */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
 
-.content{ margin-top: 55px; }
+.content {
+    margin-top: 55px;
+}
+
+ul.chat {
+    list-style: none;
+    display: block;
+    position: relative;
+    height: 200px;
+    overflow: auto;
+    /*padding: 10px 15px;*/
+    /*border: 1px solid #ddd;*/
+    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%);
+                      -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%);
+}
+
+/* TODO: this thing should stay on top */
+ul.chat .fadeout {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    padding-bottom: 20px;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, white),color-stop(1, transparent));
+    background-image: -webkit-linear-gradient(top, white, transparent);
+    background-image: -moz-linear-gradient(top, white, transparent);
+    background-image: -ms-linear-gradient(top, white, transparent);
+    background-image: -o-linear-gradient(top, white, transparent);
+    background-image: linear-gradient(top, white, transparent);
+}
