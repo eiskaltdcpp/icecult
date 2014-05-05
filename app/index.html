@@ -23,13 +23,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">EiskaltDC++ <small>{{ version }}</small></a>
+            <a class="navbar-brand" href="#" title="{{ version }}">EiskaltDC++</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{{ path == '/hubs' && 'active' }}"><a href="#/hubs">Hubs</a></li>
-                <li><a href="#">Link2</a></li>
+                <li ng-class="{active:isActive('/hubs')}"><a href="#/hubs">Hubs</a></li>
+                <li ng-class="{active:isActive('/share')}"><a href="#/share">Share</a></li>
             </ul>
             <!--<form class="navbar-form navbar-left" role="search">-->
                 <!--<div class="form-group">-->
@@ -39,7 +39,7 @@
             <!--</form>-->
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    Last Hash: 2d ago<br>
+                    Hash: {{ hashing.status }}<br>
                     Up/Down: 3,4 kB / 12.5 kB
                 </li>
                 <li class="dropdown">

@@ -7,19 +7,27 @@ var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ui.bootstrap', 'Eiska
 EiskaltApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider
         .when('/hubs', {controller: 'HubsCtrl', templateUrl: 'partials/hubs.html'})
+        .when('/share', {controller: 'ShareCtrl', templateUrl: 'partials/share.html'})
         .otherwise({redirectTo: '/hubs'});
 }]);
 
 
 /* Controllers */
-EiskaltApp.controller('MainCtrl', ['$scope', '$location', 'EiskaltRPC', function($scope, $location, EiskaltRPC) {
-	EiskaltRPC.ShowVersion().success(function(data) {
+EiskaltApp.controller('MainCtrl', function($scope, $location, EiskaltRPC) {
+	$scope.isActive = function(route) {
+        return route === $location.path();
+    }
+    EiskaltRPC.ShowVersion().success(function(data) {
         $scope.version = data;
-        $scope.path = $location.path();
     });
-}]);
+    EiskaltRPC.GetHashStatus().success(function(data) {
+        console.log(data);
+        $scope.hashing = data;
+    });
 
-EiskaltApp.controller('HubsCtrl', ['$scope', 'EiskaltRPC', function($scope, EiskaltRPC) {
+});
+
+EiskaltApp.controller('HubsCtrl', function($scope, EiskaltRPC) {
     var loadHubs = function() {
         EiskaltRPC.ListHubsFullDesc().success(function(data) {
             $scope.hubs = data;
@@ -35,11 +43,23 @@ EiskaltApp.controller('HubsCtrl', ['$scope', 'EiskaltRPC', function($scope, Eisk
     $scope.disconnect = function(huburl) {
         EiskaltRPC.HubDel(huburl).success(loadHubs);
     };
-}]);
+});
 
-EiskaltApp.controller('HubCtrl', ['$scope', 'EiskaltRPC', function($scope, EiskaltRPC) {
+EiskaltApp.controller('HubCtrl', function($scope, EiskaltRPC) {
     $scope.hub = $scope.$parent.hub;
 //    EiskaltRPC.GetHubUserList($scope.hub).success(function(data) {
 //        $scope.users = data;
 //    });
-}]);
+
+    console.log();
+
+    EiskaltRPC.GetHubUserList($scope.hub.huburl).success(function(data) {
+        console.log(data);
+    });
+});
+
+EiskaltApp.controller('ShareCtrl', function($scope, EiskaltRPC) {
+    EiskaltRPC.RefreshShare().success(function(data) {
+        console.log(data);
+    });
+});

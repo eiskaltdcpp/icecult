@@ -70,8 +70,8 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', ['$http', function($http)
 		DelDirFromShare: function(directory) {
 			return jsonrpc('share.del', {directory: directory});
 		},
-		ListShare: function(directory) {
-			return jsonrpc('share.list', {separator: '#'});
+		ListShare: function() {
+			return jsonrpc('share.list', {separator: '#'}, true);
 		},
 		RefreshShare: function() {
 			return jsonrpc('share.refresh');
