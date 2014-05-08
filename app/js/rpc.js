@@ -2,7 +2,7 @@
 
 /* Services */
 
-angular.module('EiskaltRPC', []).factory('EiskaltRPC', ['$http', function($http) {
+angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 	// private base function with success wrapper that handle list results
 	var jsonrpc = function(method, parameters, isSeperatedList) {
 		var promise = $http.post(
@@ -92,7 +92,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', ['$http', function($http)
 			return jsonrpc('show.version');
 		},
 		ShowRatio: function() {
-			return jsonrpc('show.ratio');
+            return jsonrpc('show.ratio');
 		},
 		SetPriorityQueueItem: function(target, priority) {
 			return jsonrpc('queue.setpriority', {target: target, priority: priority});
@@ -172,4 +172,4 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', ['$http', function($http)
 			return jsonrpc('list.listopened', {directory: directory, filelist: filelist});
 		}
     };
-}]);
+});

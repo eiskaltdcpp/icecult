@@ -10,7 +10,7 @@ from twisted.internet import reactor
 from twisted.web import proxy, static, server
 
 root = static.File(os.path.join(os.path.dirname(__file__), 'app'))
-root.putChild("rpc", proxy.ReverseProxyResource('192.168.1.122', 80, '/rpc'))
+root.putChild("rpc", proxy.ReverseProxyResource('192.168.1.101', 80, '/rpc'))
 
 reactor.listenTCP(80, server.Site(root))
 reactor.run()

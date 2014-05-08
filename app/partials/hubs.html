@@ -6,21 +6,10 @@
         </alert>
         <div class="row" ng-show="hub.connected">
             <ul class="list-group col-sm-3 col-sm-push-9">
-                <li class="list-group-item">
-                    <span class="badge">3.4 TB</span>
-                    lars
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">3.4 TB</span>
-                    lars
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">3.4 TB</span>
-                    lars
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">3.4 TB</span>
-                    lars
+                <li ng-repeat="user in users" class="list-group-item"
+                    popover="{{ user.IP }} - {{ user.Connection }} - {{ user.Tag }}" popover-trigger="mouseenter" popover-placement="left">
+                    <span class="badge">{{ user.Shared | numeraljs:'0.0 b' }}</span>
+                    {{ user.Nick }}
                 </li>
             </ul>
             <div class="col-sm-9 col-sm-pull-3">

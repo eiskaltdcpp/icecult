@@ -7,6 +7,10 @@
     margin-top: 55px;
 }
 
+#hash-status {
+    margin: 5px 25px;
+}
+
 ul.chat {
     list-style: none;
     display: block;
