@@ -11,38 +11,28 @@
                     <span class="badge">{{ user.Shared | numeraljs:'0.0 b' }}</span>
                     {{ user.Nick }}
                 </li>
+                <li class="list-group-item pull-right">
+                    <button class="btn btn-danger" type="button" title="Disconnect from this hub" ng-click="disconnect(hub.huburl)">Disconnect</button>
+                </li>
             </ul>
             <div class="col-sm-9 col-sm-pull-3">
                 <div class="row">
                     <ul class="chat col-sm-12">
                         <p class="fadeout"></p>
-                        <li>[00:01] hannes: Lalelu, jemand da?</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
-                        <li>[00:11] wayne: nope!, schnauze!</li>
+                        <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index">{{ message.text | chatMessage }}</li>
                     </ul>
                 </div>
                 <div class="row">
-                    <div class="input-group">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Submit</button>
-                      </span>
-                        <input type="text" class="form-control" placeholder="a chat message">
-                    </div>
+                    <form ng-submit="sendChatMessage()">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">Submit</button>
+                            </span>
+                            <input type="text" class="form-control" ng-model="newChatMessage" placeholder="a chat message">
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-        <div>
-            <button class="btn btn-danger" type="button" ng-click="disconnect(hub.huburl)">Disconnect</button>
         </div>
     </tab>
     <tab heading="+">

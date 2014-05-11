@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ui.bootstrap', 'EiskaltRPC', 'EiskaltFilters']);
+var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ui.bootstrap', 'EiskaltRPC', 'EiskaltFilters']);
 
 EiskaltApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -58,7 +58,7 @@ EiskaltApp.controller('HubsCtrl', function($scope, EiskaltRPC) {
     };
 });
 
-EiskaltApp.controller('HubCtrl', function($scope, EiskaltRPC) {
+EiskaltApp.controller('HubCtrl', function($scope, $interval, $localStorage, EiskaltRPC) {
     $scope.hub = $scope.$parent.hub;
 
     EiskaltRPC.GetHubUserList($scope.hub.huburl).success(function(users) {
@@ -70,7 +70,32 @@ EiskaltApp.controller('HubCtrl', function($scope, EiskaltRPC) {
         });
     });
 
+    // Chat
+    $scope.$storage = $localStorage.$default({
+        chatlog: {}
+    });
+    if (angular.isUndefined($scope.$storage.chatlog[$scope.hub.huburl])) {
+        $scope.$storage.chatlog[$scope.hub.huburl] = [];
+    }
+    $scope.refreshChat = function() {
+        EiskaltRPC.GetChatPub($scope.hub.huburl).success(function(messages) {
+            angular.forEach(messages, function(message) {
+                $scope.$storage.chatlog[$scope.hub.huburl].push({
+                    time: new Date(),
+                    text: message
+                });
+            })
+        });
+    };
+    $scope.refreshChat();
+    $interval($scope.refreshChat, 5000);
 
+    $scope.newChatMessage = '';
+    $scope.sendChatMessage = function() {
+        EiskaltRPC.HubSay($scope.hub.huburl, $scope.newChatMessage);
+        $scope.newChatMessage = '';
+        $scope.refreshChat();
+    }
 });
 
 EiskaltApp.controller('ShareCtrl', function($scope, EiskaltRPC) {
