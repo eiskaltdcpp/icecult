@@ -17,7 +17,7 @@
             </ul>
             <div class="col-sm-9 col-sm-pull-3">
                 <div class="row">
-                    <ul class="chat col-sm-12">
+                    <ul class="chat col-sm-12" scroll-glue>
                         <p class="fadeout"></p>
                         <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index">{{ message.text | chatMessage }}</li>
                     </ul>
