@@ -26,10 +26,10 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 					if (result.length == 0) {
 						result = []
 					} else {
-						// can have trailing seperator
+						// can have trailing separator
 						var re = new RegExp(parameters.separator + '+$','g');
 						result = result.replace(re, '');
-						// split by seperator
+						// split by separator
 						result = result.split(parameters.separator);
 					}
 				}
