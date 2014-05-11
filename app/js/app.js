@@ -69,13 +69,13 @@ EiskaltApp.controller('HubCtrl', function($scope, $interval, $localStorage, Eisk
             });
         });
     });
-
-    // Chat
-    $scope.$storage = $localStorage.$default({
-        chatlog: {}
-    });
+    // initialize localStorage for chatlog per hub
+    $scope.$storage = $localStorage.$default({chatlog: {}});
     if (angular.isUndefined($scope.$storage.chatlog[$scope.hub.huburl])) {
         $scope.$storage.chatlog[$scope.hub.huburl] = [];
+    } else {
+        // clean old messages
+        $scope.$storage.chatlog[$scope.hub.huburl] = $scope.$storage.chatlog[$scope.hub.huburl].slice(-250);
     }
     $scope.refreshChat = function() {
         EiskaltRPC.GetChatPub($scope.hub.huburl).success(function(messages) {
