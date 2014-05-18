@@ -1,10 +1,12 @@
 <tabset>
+    <!-- Tab per hub -->
     <tab heading="{{ hub.hubname }}" active="$first" ng-repeat="hub in hubs" ng-controller="HubCtrl">
         <alert ng-hide="hub.connected">
             Not connected to <strong>{{ hub.huburl }}</strong>. Just added? Reload the page again.
             Maybe you should look into daemon's log.
         </alert>
         <div class="row" ng-show="hub.connected">
+            <!-- User List -->
             <ul class="list-group col-sm-3 col-sm-push-9">
                 <li ng-repeat="user in users" class="list-group-item"
                     popover="{{ user.IP }} - {{ user.Connection }} - {{ user.Tag }}" popover-trigger="mouseenter" popover-placement="left">
@@ -16,12 +18,14 @@
                 </li>
             </ul>
             <div class="col-sm-9 col-sm-pull-3">
+                <!-- Chat Log -->
                 <div class="row">
                     <ul class="chat col-sm-12" scroll-glue>
                         <p class="fadeout"></p>
                         <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index">{{ message.text | chatMessage }}</li>
                     </ul>
                 </div>
+                <!-- Message Submit -->
                 <div class="row">
                     <form ng-submit="sendChatMessage()">
                         <div class="input-group">
@@ -35,6 +39,7 @@
             </div>
         </div>
     </tab>
+    <!-- Add new hub -->
     <tab heading="+">
         <form role="form">
             <input type="text" class="form-control" ng-model="newHubUrl">
