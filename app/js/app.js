@@ -11,11 +11,11 @@ EiskaltApp.config(['$routeProvider', function($routeProvider) {
             controller: 'HubsCtrl',
             templateUrl: 'partials/hubs.html'
         })
-        .when('/browse/:cid', {
+        .when('/browse', {
             controller: 'BrowseCtrl',
             templateUrl: 'partials/browse.html'
         })
-        .when('/queue/', {
+        .when('/queue', {
             controller: 'QueueCtrl',
             templateUrl: 'partials/queue.html'
         })
@@ -107,19 +107,20 @@ EiskaltApp.controller('HubCtrl', function($scope, $interval, $localStorage, Eisk
         $scope.newChatMessage = '';
         $scope.refreshChat();
     }
+
+    $scope.getFilelist = function(nick) {
+        EiskaltRPC.GetFileList($scope.hub.huburl, nick);
+    }
 });
 
 EiskaltApp.controller('BrowseCtrl', function($scope, $routeParams, ShareBrowser, EiskaltRPC) {
-    ShareBrowser.BuildBrowseCtrlContext($routeParams.cid).then(function(context) {
-        $scope.hub = context.hub;
-        $scope.user = context.user;
-    });
+//    ShareBrowser.BuildBrowseCtrlContext($routeParams.cid).then(function(context) {
+//        $scope.hub = context.hub;
+//        $scope.user = context.user;
+//    });
 
-    EiskaltRPC.ShowLocalLists().success(function(data) {
-        console.log(data);
-    });
-    EiskaltRPC.ShowLocalLists().success(function(data) {
-        console.log(data);
+    EiskaltRPC.ShowLocalLists().success(function(filelists) {
+        $scope.filelists = filelists;
     });
 });
 
