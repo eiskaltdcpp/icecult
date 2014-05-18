@@ -169,7 +169,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('list.listopened', {separator: '#'}, true);
 		},
 		LsDirInList: function(directory, filelist) {
-			return jsonrpc('list.listopened', {directory: directory, filelist: filelist});
+			return jsonrpc('list.lsdir', {directory: directory, filelist: filelist});
 		}
     };
 });
