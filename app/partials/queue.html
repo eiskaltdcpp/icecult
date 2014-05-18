@@ -1,0 +1,26 @@
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Progress</th>
+                <th>Status</th>
+                <th>Added</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(key, item) in queue">
+                <td>{{ item.Filename }}</td>
+                <td>
+                    <progressbar value="item.Downloaded | extractPercentage">
+                        <span style="color:black; white-space:nowrap;">
+                            {{ item.Downloaded }}
+                        </span>
+                    </progressbar>
+                </td>
+                <td>{{ item.Status }}</td>
+                <td>{{ item.Added }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

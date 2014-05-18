@@ -12,3 +12,9 @@ EiskaltFilters.filter('chatMessage', function () {
         return input
     };
 });
+
+EiskaltFilters.filter('extractPercentage', function () {
+    return function (input) {
+        return /\((\d+\.\d+)%\)/.exec(input)[1]
+    };
+});

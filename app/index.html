@@ -14,6 +14,7 @@
     <script src="js/libs/scrollglue.js"></script>
     <script src="js/app.js"></script>
     <script src="js/rpc.js"></script>
+    <script src="js/browse.js"></script>
     <script src="js/filters.js"></script>
 </head>
 <body ng-controller="MainCtrl">
@@ -38,16 +39,16 @@
                         Hubs
                     </a>
                 </li>
-                <li ng-class="{active:isActive('/share')}">
-                    <a href="#/share">
+                <li ng-class="{active:isActive('/browse')}">
+                    <a href="#/browse">
                         <span class="glyphicon glyphicon-folder-open"></span>
-                        Share
+                        Browse
                     </a>
                 </li>
-                <li ng-class="{active:isActive('/transfers')}">
-                    <a href="#">
+                <li ng-class="{active:isActive('/queue')}">
+                    <a href="#/queue">
                         <span class="glyphicon glyphicon-tasks"></span>
-                        Transfers
+                        Queue
                     </a>
                 </li>
             </ul>

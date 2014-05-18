@@ -2,12 +2,23 @@
 
 /* App Module */
 
-var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'luegg.directives', 'ui.bootstrap', 'EiskaltRPC', 'EiskaltFilters']);
+var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'luegg.directives', 'ui.bootstrap',
+                                               'EiskaltRPC', 'ShareBrowser', 'EiskaltFilters']);
 
 EiskaltApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-        .when('/hubs', {controller: 'HubsCtrl', templateUrl: 'partials/hubs.html'})
-        .when('/share', {controller: 'ShareCtrl', templateUrl: 'partials/share.html'})
+        .when('/hubs', {
+            controller: 'HubsCtrl',
+            templateUrl: 'partials/hubs.html'
+        })
+        .when('/browse/:cid', {
+            controller: 'BrowseCtrl',
+            templateUrl: 'partials/browse.html'
+        })
+        .when('/queue/', {
+            controller: 'QueueCtrl',
+            templateUrl: 'partials/queue.html'
+        })
         .otherwise({redirectTo: '/hubs'});
 }]);
 
@@ -43,7 +54,7 @@ EiskaltApp.controller('MainCtrl', function($scope, $location, $interval, Eiskalt
 EiskaltApp.controller('HubsCtrl', function($scope, EiskaltRPC) {
     var loadHubs = function() {
         EiskaltRPC.ListHubsFullDesc().success(function(data) {
-            $scope.hubs = data;
+            $scope.$root.hubs = data;
         });
     };
     loadHubs();
@@ -98,8 +109,22 @@ EiskaltApp.controller('HubCtrl', function($scope, $interval, $localStorage, Eisk
     }
 });
 
-EiskaltApp.controller('ShareCtrl', function($scope, EiskaltRPC) {
-    EiskaltRPC.ListShare().success(function(data) {
+EiskaltApp.controller('BrowseCtrl', function($scope, $routeParams, ShareBrowser, EiskaltRPC) {
+    ShareBrowser.BuildBrowseCtrlContext($routeParams.cid).then(function(context) {
+        $scope.hub = context.hub;
+        $scope.user = context.user;
+    });
+
+    EiskaltRPC.ShowLocalLists().success(function(data) {
         console.log(data);
+    });
+    EiskaltRPC.ShowLocalLists().success(function(data) {
+        console.log(data);
+    });
+});
+
+EiskaltApp.controller('QueueCtrl', function($scope, $routeParams, EiskaltRPC) {
+    EiskaltRPC.ListQueue().success(function(queue) {
+        $scope.queue = queue;
     });
 });
