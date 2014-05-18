@@ -22,7 +22,7 @@
                 <!-- Chat Log -->
                 <div class="row">
                     <ul class="chat col-sm-12" scroll-glue>
-                        <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index">{{ message.text | chatMessage }}</li>
+                        <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index" ng-bind-html="message | chatMessage"></li>
                     </ul>
                 </div>
                 <!-- Message Submit -->

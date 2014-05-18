@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'luegg.directives', 'ui.bootstrap',
+var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ngSanitize', 'luegg.directives', 'ui.bootstrap',
                                                'EiskaltRPC', 'ShareBrowser', 'EiskaltFilters']);
 
 EiskaltApp.config(['$routeProvider', function($routeProvider) {
