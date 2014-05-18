@@ -24,7 +24,7 @@ ul.chat {
 }
 
 /* TODO: this thing should stay on top */
-ul.chat .fadeout {
+.fadeout {
     position: absolute;
     top: 0; left: 0;
     width: 100%;
