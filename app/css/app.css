@@ -23,8 +23,7 @@ ul.chat {
                       -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%);
 }
 
-/* TODO: this thing should stay on top */
-ul.chat .fadeout {
+.fadeout {
     position: absolute;
     top: 0; left: 0;
     width: 100%;
@@ -35,4 +34,9 @@ ul.chat .fadeout {
     background-image: -ms-linear-gradient(top, white, transparent);
     background-image: -o-linear-gradient(top, white, transparent);
     background-image: linear-gradient(top, white, transparent);
+}
+
+ul.user-list .badge {
+    margin-top: 2px;
+    margin-right: 5px;
 }
