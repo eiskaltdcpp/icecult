@@ -18,3 +18,9 @@ EiskaltFilters.filter('extractPercentage', function () {
         return /\((\d+\.\d+)%\)/.exec(input)[1]
     };
 });
+
+EiskaltFilters.filter('filelist2user', function () {
+    return function (input) {
+        return input.split('.')[0]
+    };
+});

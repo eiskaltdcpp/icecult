@@ -169,7 +169,18 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('list.listopened', {separator: '#'}, true);
 		},
 		LsDirInList: function(directory, filelist) {
-			return jsonrpc('list.lsdir', {directory: directory, filelist: filelist});
+            var promise = jsonrpc('list.lsdir', {directory: directory, filelist: filelist});
+            promise.success = function(fn) {
+			    promise.then(function(response) {
+                    // convert to tree node
+                    var nodes = [];
+                    angular.forEach(response.data.result, function(value, key) {
+                        nodes.push({label: key, data: value});
+                    });
+                    fn(nodes);
+                });
+		    };
+            return promise;
 		}
     };
 });
