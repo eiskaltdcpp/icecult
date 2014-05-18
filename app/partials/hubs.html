@@ -7,12 +7,12 @@
         </alert>
         <div class="row" ng-show="hub.connected">
             <!-- User List -->
-            <ul class="list-group col-sm-3 col-sm-push-9">
+            <ul class="user-list list-group col-sm-3 col-sm-push-9">
                 <li ng-repeat="user in users" class="list-group-item"
                     popover="{{ user.IP }} - {{ user.Connection }} - {{ user.Tag }}" popover-trigger="mouseenter" popover-placement="left">
+                    <button class="btn btn-info btn-xs pull-right" type="button" title="Download {{ user.Nick }}'s Fileist" ng-click="getFilelist(user.Nick)">Browse</button>
                     <span class="badge">{{ user.Shared | numeraljs:'0.0 b' }}</span>
                     {{ user.Nick }}
-                    <button class="btn btn-info btn-xs pull-right" type="button" title="Download {{ user.Nick }}'s Fileist" ng-click="getFilelist(user.Nick)">Browse</button>
                 </li>
                 <li class="list-group-item pull-right">
                     <button class="btn btn-danger" type="button" title="Disconnect from this hub" ng-click="disconnect(hub.huburl)">Disconnect</button>
