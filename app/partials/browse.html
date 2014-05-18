@@ -1,8 +1,10 @@
-<alert>
+<alert ng-hide="filelists.length > 0">
     No file lists available. Maybe the one you are looking for is not downloaded yet.
     Look into the <a href="#/queue">Download-Queue</a>.
 </alert>
 
-TODO: Build UI using context!
-<br>
-Context: {{ filelists }}
+<tabset>
+    <tab ng-repeat="filelist in filelists" heading="{{ filelist | filelist2user }}" ng-controller="FileListCtrl">
+        <abn-tree tree-data="treeData" tree-control="tree" on-select="handle(branch)">Loading...</abn-tree>
+    </tab>
+</tabset>

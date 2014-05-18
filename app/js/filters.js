@@ -41,3 +41,9 @@ EiskaltFilters.filter('stringToColor', function() {
         return color;
     }
 });
+
+EiskaltFilters.filter('filelist2user', function () {
+    return function (input) {
+        return input.split('.')[0]
+    };
+});

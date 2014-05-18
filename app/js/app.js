@@ -3,9 +3,9 @@
 /* App Module */
 
 var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ngSanitize', 'luegg.directives', 'ui.bootstrap',
-                                               'EiskaltRPC', 'ShareBrowser', 'EiskaltFilters']);
+                                               'angularBootstrapNavTree', 'EiskaltRPC', 'ShareBrowser', 'EiskaltFilters']);
 
-EiskaltApp.config(['$routeProvider', function($routeProvider) {
+EiskaltApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/hubs', {
             controller: 'HubsCtrl',
@@ -24,26 +24,25 @@ EiskaltApp.config(['$routeProvider', function($routeProvider) {
 
 
 /* Controllers */
-EiskaltApp.controller('MainCtrl', function($scope, $location, $interval, EiskaltRPC) {
-	$scope.isActive = function(route) {
+EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, EiskaltRPC) {
+    $scope.isActive = function (route) {
         return route === $location.path();
     }
-    $scope.pauseHash = function() {
-        EiskaltRPC.PauseHash().success(function(data) {
-            console.log(data);
+    $scope.pauseHash = function () {
+        EiskaltRPC.PauseHash().success(function (data) {
             $scope.refreshData()
         });
     }
 
-    EiskaltRPC.ShowVersion().success(function(data) {
+    EiskaltRPC.ShowVersion().success(function (data) {
         $scope.version = data;
     });
 
-    $scope.refreshData = function() {
-        EiskaltRPC.GetHashStatus().success(function(data) {
+    $scope.refreshData = function () {
+        EiskaltRPC.GetHashStatus().success(function (data) {
             $scope.hashing = data;
         });
-        EiskaltRPC.ShowRatio().success(function(data) {
+        EiskaltRPC.ShowRatio().success(function (data) {
             $scope.ratio = data;
         });
     }
@@ -51,31 +50,31 @@ EiskaltApp.controller('MainCtrl', function($scope, $location, $interval, Eiskalt
     $interval($scope.refreshData, 5000);
 });
 
-EiskaltApp.controller('HubsCtrl', function($scope, EiskaltRPC) {
-    var loadHubs = function() {
-        EiskaltRPC.ListHubsFullDesc().success(function(data) {
+EiskaltApp.controller('HubsCtrl', function ($scope, EiskaltRPC) {
+    var loadHubs = function () {
+        EiskaltRPC.ListHubsFullDesc().success(function (data) {
             $scope.$root.hubs = data;
         });
     };
     loadHubs();
 
     $scope.newHubUrl = 'adc://';
-    $scope.connect = function(newHubUrl) {
+    $scope.connect = function (newHubUrl) {
         EiskaltRPC.HubAdd(newHubUrl).success(loadHubs);
     };
 
-    $scope.disconnect = function(huburl) {
+    $scope.disconnect = function (huburl) {
         EiskaltRPC.HubDel(huburl).success(loadHubs);
     };
 });
 
-EiskaltApp.controller('HubCtrl', function($scope, $interval, $localStorage, EiskaltRPC) {
+EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, EiskaltRPC) {
     $scope.hub = $scope.$parent.hub;
 
-    EiskaltRPC.GetHubUserList($scope.hub.huburl).success(function(users) {
+    EiskaltRPC.GetHubUserList($scope.hub.huburl).success(function (users) {
         $scope.users = [];
-        angular.forEach(users, function(user) {
-            EiskaltRPC.GetUserInfo(user, $scope.hub.huburl).success(function(data) {
+        angular.forEach(users, function (user) {
+            EiskaltRPC.GetUserInfo(user, $scope.hub.huburl).success(function (data) {
                 $scope.users.push(data);
             });
         });
@@ -88,9 +87,9 @@ EiskaltApp.controller('HubCtrl', function($scope, $interval, $localStorage, Eisk
         // clean old messages
         $scope.$storage.chatlog[$scope.hub.huburl] = $scope.$storage.chatlog[$scope.hub.huburl].slice(-250);
     }
-    $scope.refreshChat = function() {
-        EiskaltRPC.GetChatPub($scope.hub.huburl).success(function(messages) {
-            angular.forEach(messages, function(message) {
+    $scope.refreshChat = function () {
+        EiskaltRPC.GetChatPub($scope.hub.huburl).success(function (messages) {
+            angular.forEach(messages, function (message) {
                 $scope.$storage.chatlog[$scope.hub.huburl].push({
                     time: new Date(),
                     text: message
@@ -102,30 +101,49 @@ EiskaltApp.controller('HubCtrl', function($scope, $interval, $localStorage, Eisk
     $interval($scope.refreshChat, 5000);
 
     $scope.newChatMessage = '';
-    $scope.sendChatMessage = function() {
+    $scope.sendChatMessage = function () {
         EiskaltRPC.HubSay($scope.hub.huburl, $scope.newChatMessage);
         $scope.newChatMessage = '';
         $scope.refreshChat();
     }
 
-    $scope.getFilelist = function(nick) {
+    $scope.getFilelist = function (nick) {
         EiskaltRPC.GetFileList($scope.hub.huburl, nick);
     }
 });
 
-EiskaltApp.controller('BrowseCtrl', function($scope, $routeParams, ShareBrowser, EiskaltRPC) {
-//    ShareBrowser.BuildBrowseCtrlContext($routeParams.cid).then(function(context) {
-//        $scope.hub = context.hub;
-//        $scope.user = context.user;
-//    });
-
-    EiskaltRPC.ShowLocalLists().success(function(filelists) {
+EiskaltApp.controller('BrowseCtrl', function ($scope, $routeParams, ShareBrowser, EiskaltRPC) {
+    EiskaltRPC.ShowLocalLists().success(function (filelists) {
         $scope.filelists = filelists;
+        EiskaltRPC.ShowOpenedLists().success(function (openedFilelists) {
+            angular.forEach($scope.filelists, function (filelist) {
+                if (openedFilelists.indexOf(filelist) < 0) {
+                    EiskaltRPC.OpenFileList(filelist);
+                }
+            });
+        });
     });
 });
 
-EiskaltApp.controller('QueueCtrl', function($scope, $routeParams, EiskaltRPC) {
-    EiskaltRPC.ListQueue().success(function(queue) {
+EiskaltApp.controller('FileListCtrl', function ($scope, EiskaltRPC) {
+    $scope.filelist = $scope.$parent.filelist;
+
+    $scope.tree = {}
+    $scope.treeData = [];
+    EiskaltRPC.LsDirInList('', $scope.filelist).success(function (data) {
+        $scope.treeData = data;
+    });
+
+    $scope.handle = function(branch) {
+        EiskaltRPC.LsDirInList(branch.label, $scope.filelist).success(function (data) {
+            console.log(data);
+            //$scope.tree.add_branch(branch,
+        });
+    };
+});
+
+EiskaltApp.controller('QueueCtrl', function ($scope, $routeParams, EiskaltRPC) {
+    EiskaltRPC.ListQueue().success(function (queue) {
         $scope.queue = queue;
     });
 });
