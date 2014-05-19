@@ -180,7 +180,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
                     angular.forEach(response.data.result, function(value, key) {
                         nodes.push({
                             label: key,
-                            path: directory + key,
+                            target: directory + key,
                             isFolder: value.Name.indexOf('d') == 0,
                             data: value});
                     });
@@ -188,6 +188,19 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
                 });
 		    };
             return promise;
-		}
+		},
+        DownloadDirFromList: function(target, downloadto, filelist) {
+            return jsonrpc('list.downloaddir', {
+                target: target + '\\',
+                downloadto: downloadto,
+                filelist: filelist
+            });
+        },
+        DownloadFileFromList: function(target, downloadto, filelist) {
+            return jsonrpc('list.downloadfile');
+        },
+        GetItemDescbyTarget: function(target) {
+            return jsonrpc('queue.getiteminfo');
+        }
     };
 });

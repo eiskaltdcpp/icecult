@@ -11,6 +11,17 @@
     margin: 5px 25px;
 }
 
+#queue .progress {
+    margin: 0px;
+}
+#queue .progress span {
+    padding: 0px 5px;
+}
+
+ul.abn-tree li.abn-tree-row a {
+    position: relative;
+}
+
 ul.chat {
     list-style: none;
     display: block;

@@ -1,0 +1,37 @@
+<ul class="nav nav-list nav-pills nav-stacked abn-tree">
+    <li ng-repeat="row in tree_rows | filter:{visible:true} track by row.branch.uid"
+        ng-animate="'abn-tree-animate'"
+        ng-class="'level-' + {{ row.level }}"
+        class="abn-tree-row">
+
+        <!--<button class="btn btn-info btn-xs pull-right"-->
+        <!--type="button" title="Download"-->
+        <!--ng-click="$parent.$parent.download(row.branch); $event.stopPropagation()">-->
+        <!--Download-->
+        <!--</button>-->
+
+
+        <!-- Single button -->
+
+        <div class="btn-group pull-right" dropdown is-open="status.isopen">
+            <button type="button" class="btn btn-info btn-xs dropdown-toggle" ng-disabled="disabled">
+                Button dropdown <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Download Folder</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+            </ul>
+        </div>
+        <span class="badge pull-right">{{ row.branch.data.Size | numeraljs:'0.0 b' }}</span>
+
+        <a ng-click="user_clicks_branch(row.branch)">
+            <i ng-class="row.tree_icon"
+               ng-click="row.branch.expanded = !row.branch.expanded"
+               class="indented tree-icon"> </i>
+            <span class="indented tree-label">{{ row.label }}</span>
+        </a>
+    </li>
+</ul>

@@ -1,6 +1,11 @@
 'use strict';
 
 /* App Module */
+var REFRESH = {
+    'hash_ratio': 10000,
+    'hub_chat': 10000,
+    'queues': 10000
+}
 
 var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ngSanitize', 'luegg.directives', 'ui.bootstrap',
                                                'angularBootstrapNavTree', 'EiskaltRPC', 'ShareBrowser', 'EiskaltFilters']);
@@ -47,7 +52,7 @@ EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, Eiskal
         });
     }
     $scope.refreshData();
-    $interval($scope.refreshData, 5000);
+    $interval($scope.refreshData, REFRESH['hash_ratio']);
 });
 
 EiskaltApp.controller('HubsCtrl', function ($scope, EiskaltRPC) {
@@ -98,7 +103,7 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, Eis
         });
     };
     $scope.refreshChat();
-    $interval($scope.refreshChat, 5000);
+    $interval($scope.refreshChat, REFRESH['hub_chat']);
 
     $scope.newChatMessage = '';
     $scope.sendChatMessage = function () {
@@ -136,17 +141,27 @@ EiskaltApp.controller('FileListCtrl', function ($scope, EiskaltRPC) {
 
     $scope.handle = function(node) {
         if (node.isFolder) {
-            EiskaltRPC.LsDirInList(node.path, $scope.filelist).success(function (children) {
+            EiskaltRPC.LsDirInList(node.target, $scope.filelist).success(function (children) {
                 angular.forEach(children, function (child) {
                     $scope.tree.add_branch(node, child);
                 });
             });
         }
     };
+    $scope.download = function(node) {
+        EiskaltRPC.DownloadDirFromList(node.target, '', $scope.filelist).success(function(data) {
+            console.log(data);
+        })
+        console.log('Download', node.target, '', $scope.filelist);
+    };
 });
 
-EiskaltApp.controller('QueueCtrl', function ($scope, $routeParams, EiskaltRPC) {
-    EiskaltRPC.ListQueue().success(function (queue) {
-        $scope.queue = queue;
-    });
+EiskaltApp.controller('QueueCtrl', function ($scope, $interval, EiskaltRPC) {
+    var refreshQueue = function () {
+        EiskaltRPC.ListQueue().success(function(queue) {
+            $scope.queue = queue;
+        });
+    };
+    refreshQueue();
+    $interval(refreshQueue, REFRESH['queues']);
 });

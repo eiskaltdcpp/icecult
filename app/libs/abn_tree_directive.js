@@ -7,7 +7,7 @@
     '$timeout', function($timeout) {
       return {
         restrict: 'E',
-        templateUrl: "partials/_tree_node.html",
+        templateUrl: "partials/browse_tree.html",
         replace: true,
         scope: {
           treeData: '=',

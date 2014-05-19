@@ -6,11 +6,13 @@
 #   (where the nginx proxy it into eiskalt-daemon)
 #
 import os
+import sys
+
 from twisted.internet import reactor
 from twisted.web import proxy, static, server
 
 root = static.File(os.path.join(os.path.dirname(__file__), 'app'))
-root.putChild("rpc", proxy.ReverseProxyResource('192.168.1.101', 80, '/rpc'))
+root.putChild("rpc", proxy.ReverseProxyResource(sys.argv[1], 80, '/rpc'))
 
 reactor.listenTCP(80, server.Site(root))
 reactor.run()
