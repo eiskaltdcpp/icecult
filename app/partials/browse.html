@@ -5,6 +5,6 @@
 
 <tabset>
     <tab ng-repeat="filelist in filelists" heading="{{ filelist | filelist2user }}" ng-controller="FileListCtrl">
-        <abn-tree tree-data="treeData" tree-control="tree" on-select="handle(branch)">Loading...</abn-tree>
+        <abn-tree tree-data="treeData" tree-control="tree" on-select="handle(branch)"></abn-tree>
     </tab>
 </tabset>
