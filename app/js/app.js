@@ -134,11 +134,14 @@ EiskaltApp.controller('FileListCtrl', function ($scope, EiskaltRPC) {
         $scope.treeData = data;
     });
 
-    $scope.handle = function(branch) {
-        EiskaltRPC.LsDirInList(branch.label, $scope.filelist).success(function (data) {
-            console.log(data);
-            //$scope.tree.add_branch(branch,
-        });
+    $scope.handle = function(node) {
+        if (node.isFolder) {
+            EiskaltRPC.LsDirInList(node.path, $scope.filelist).success(function (children) {
+                angular.forEach(children, function (child) {
+                    $scope.tree.add_branch(node, child);
+                });
+            });
+        }
     };
 });
 
