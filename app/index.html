@@ -15,9 +15,12 @@
     <script src="libs/scrollglue.js"></script>
     <script src="libs/abn_tree_directive.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/rpc.js"></script>
-    <script src="js/browse.js"></script>
     <script src="js/filters.js"></script>
+    <script src="js/services/rpc.js"></script>
+    <script src="js/controllers/main.js"></script>
+    <script src="js/controllers/hubs.js"></script>
+    <script src="js/controllers/browse.js"></script>
+    <script src="js/controllers/queue.js"></script>
 </head>
 <body ng-controller="MainCtrl">
 
@@ -69,7 +72,7 @@
                 </div>
                 <div>
                     <span class="glyphicon glyphicon-transfer"></span>
-                    Up/Down: {{ ratio.up }} / {{ ratio.down }}
+                    Up-/Downloaded: {{ ratio.up }} / {{ ratio.down }}
                 </div>
             </div>
         </div>

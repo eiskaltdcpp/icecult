@@ -1,7 +1,5 @@
 'use strict';
 
-/* Services */
-
 angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 	// private base function with success wrapper that handle list results
 	var jsonrpc = function(method, parameters, isSeperatedList) {
