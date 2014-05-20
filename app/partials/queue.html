@@ -6,11 +6,14 @@
                 <th>Progress</th>
                 <th>Status</th>
                 <th>Added</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="(key, item) in queue">
-                <td>{{ item.Filename }}</td>
+                <td>
+                    {{ item.Filename }}
+                </td>
                 <td>
                     <progressbar value="item.Downloaded | extractPercentage">
                         <span style="color:black; white-space:nowrap;">
@@ -18,8 +21,19 @@
                         </span>
                     </progressbar>
                 </td>
-                <td>{{ item.Status }}</td>
-                <td>{{ item.Added }}</td>
+                <td>
+                    {{ item.Status }}
+                </td>
+                <td>
+                    {{ item.Added }}
+                </td>
+                <td>
+                    <button class="btn btn-danger btn-xs" type="button" title="Abort download of this file"
+                            ng-click="abort(item)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Abort
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
