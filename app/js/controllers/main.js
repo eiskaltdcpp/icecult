@@ -14,7 +14,10 @@ EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, Eiskal
         });
     }
     refreshData();
-    $interval(refreshData, REFRESH['hash_ratio']);
+    var refreshDataTimer = $interval(refreshData, REFRESH['hash_ratio']);
+    $scope.$on("$destroy", function(event) {
+        $interval.cancel(refreshDataTimer);
+    });
 
     $scope.isActive = function (route) {
         return route === $location.path();

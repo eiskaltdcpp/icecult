@@ -49,7 +49,10 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, Eis
         });
     };
     $scope.refreshChat();
-    $interval($scope.refreshChat, REFRESH['hub_chat']);
+    var refreshChatTimer = $interval($scope.refreshChat, REFRESH['hub_chat']);
+    $scope.$on("$destroy", function(event) {
+        $interval.cancel(refreshChatTimer);
+    });
 
     $scope.newChatMessage = '';
     $scope.sendChatMessage = function () {
