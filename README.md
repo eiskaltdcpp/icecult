@@ -24,4 +24,4 @@ Screenshots
 Setup
 -----
 
-Look here [wiki site](icecult/wiki).
+Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
