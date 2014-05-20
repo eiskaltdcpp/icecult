@@ -6,12 +6,20 @@
                     <i ng-class="row.tree_icon"
                        ng-click="row.branch.expanded = !row.branch.expanded"
                        class="indented tree-icon"> </i>
-                    <span class="indented tree-label">{{ row.label }}</span>
+                    <span class="indented tree-label">
+                        {{ row.label }}
+                    </span>
                 </a>
             </td>
-            <td>{{ row.branch.data.Size | numeraljs:'0.0 b' }}</td>
+            <td>
+                <span ng-hide="row.branch.data.Size - 0 < 1">
+                    {{ row.branch.data.Size | numeraljs:'0.0 b' }}
+                </span>
+            </td>
             <td ng-controller="BrowseDownloadCtrl">
-                <button type="button" class="btn btn-primary btn-xs pull-right" ng-click="download(row.branch)" ng-disabled="downloaded">
+                <button type="button" class="btn btn-primary btn-xs pull-right"
+                        ng-click="download(row.branch)"
+                        ng-disabled="downloaded">
                     <span class="glyphicon"
                           ng-class="downloaded ? 'glyphicon-ok' : 'glyphicon-download-alt'">
                     </span>

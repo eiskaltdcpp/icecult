@@ -61,14 +61,20 @@
                 <div popover="" popover-trigger="mouseenter" popover-placement="bottom" popover-html="true">
                     <span class="glyphicon glyphicon-hdd"></span>
                     Hash:
-                    <button type="button" title="Click to pause hashing" class="btn btn-info btn-xs"
-                            ng-click="pauseHash()" ng-show="hashing.status == 'hashing'">{{ hashing.status }}
+                    <span class="label"
+                          ng-hide="hashing.status == 'idle'"
+                          ng-class="{'label-info': hashing.status == 'hashing', 'label-warning': hashing.status == 'pause'}">
+                        {{ hashing.status }}
+                    </span>
+                    <button type="button" title="Click to refresh share"
+                            class="btn btn-success btn-xs"
+                            ng-click="refreshShare()"
+                            ng-show="hashing.status == 'idle'">
+                        {{ hashing.status }}
                     </button>
-                    <button type="button" title="Click to continue hashing" class="btn btn-warning btn-xs"
-                            ng-click="pauseHash()" ng-show="hashing.status == 'pause'">{{ hashing.status }}
-                    </button>
-                    <span class="label label-success" ng-show="hashing.status == 'idle'">{{ hashing.status }}</span>
-                    <span ng-hide="hashing.status == 'idle'">{{ hashing.bytesleft | numeraljs:'0.0 b' }} left</span>
+                    <span ng-hide="hashing.status == 'idle'">
+                        {{ hashing.bytesleft | numeraljs:'0.0 b' }} left
+                    </span>
                 </div>
                 <div>
                     <span class="glyphicon glyphicon-transfer"></span>

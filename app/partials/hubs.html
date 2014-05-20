@@ -4,7 +4,8 @@
         <alert ng-hide="hub.connected">
             Not connected to <strong>{{ hub.huburl }}</strong>. Just added? Reload the page again.
             Maybe you should look into daemon's log.
-            <button class="btn btn-danger btn-xs" type="button" title="Disconnect from this hub" ng-click="disconnect(hub.huburl)">
+            <button class="btn btn-danger btn-xs" type="button" title="Disconnect from this hub"
+                    ng-click="disconnect(hub.huburl)">
                 <span class="glyphicon glyphicon-log-out"></span>
                 Disconnect
             </button>
@@ -12,17 +13,22 @@
         <div class="row" ng-show="hub.connected">
             <!-- User List -->
             <ul class="user-list list-group col-sm-3 col-sm-push-9">
-                <li ng-repeat="user in users" class="list-group-item"
-                    popover="{{ user.IP }} - {{ user.Connection }} - {{ user.Tag }}" popover-trigger="mouseenter" popover-placement="left">
-                    <button class="btn btn-info btn-xs pull-right" type="button" title="Download {{ user.Nick }}'s filelist" ng-click="getFilelist(user.Nick)">
-                        <span class="glyphicon glyphicon-list-alt"></span>
-                        Browse
+                <li ng-repeat="user in users" class="list-group-item" ng-controller="UserCtrl"
+                    popover="{{ user.IP }} - {{ user.Connection }} - {{ user.Tag }}"
+                    popover-trigger="mouseenter" popover-placement="left">
+                    <button class="btn btn-primary btn-xs pull-right" type="button"
+                            title="Download {{ user.Nick }}'s filelist"
+                            ng-click="downloadFilelist(user.Nick)"
+                            ng-disabled="downloading">
+                        <span class="glyphicon" ng-class="downloading ? 'glyphicon-ok' : 'glyphicon-list-alt'"></span>
+                        {{ downloading && 'Downloading' || 'Browse' }}
                     </button>
                     <span class="badge">{{ user.Shared | numeraljs:'0.0 b' }}</span>
 	            <span class="nick" style="color: #{{ user.Nick | stringToColor }}">{{ user.Nick }}</span>
                 </li>
                 <li class="list-group-item pull-right">
-                    <button class="btn btn-danger btn-xs" type="button" title="Disconnect from this hub" ng-click="disconnect(hub.huburl)">
+                    <button class="btn btn-danger btn-xs" type="button" title="Disconnect from this hub"
+                            ng-click="disconnect(hub.huburl)">
                         <span class="glyphicon glyphicon-log-out"></span>
                         Disconnect
                     </button>
@@ -32,7 +38,8 @@
                 <!-- Chat Log -->
                 <div class="row">
                     <ul class="chat col-sm-12" scroll-glue>
-                        <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index" ng-bind-html="message | chatMessage"></li>
+                        <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index"
+                            ng-bind-html="message | chatMessage"></li>
                     </ul>
                 </div>
                 <!-- Message Submit -->
@@ -45,7 +52,8 @@
                                     Submit
                                 </button>
                             </span>
-                            <input type="text" class="form-control" ng-model="newChatMessage" placeholder="a chat message">
+                            <input type="text" class="form-control" ng-model="newChatMessage"
+                                   placeholder="a chat message">
                         </div>
                     </form>
                 </div>

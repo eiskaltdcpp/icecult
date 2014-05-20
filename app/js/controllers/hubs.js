@@ -63,3 +63,17 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, Eis
         EiskaltRPC.GetFileList($scope.hub.huburl, nick);
     }
 });
+
+EiskaltApp.controller('UserCtrl', function ($scope, EiskaltRPC) {
+    $scope.downloading = false;
+
+    $scope.downloadFilelist = function (nick) {
+        EiskaltRPC.GetFileList($scope.hub.huburl, nick).success(function(status) {
+            if (status == 0) {
+                $scope.downloading = true;
+            } else {
+                alert('Download failed. Maybe still downloading or downloaded already?');
+            }
+        });
+    };
+});
