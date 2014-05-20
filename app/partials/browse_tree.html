@@ -10,25 +10,13 @@
                 </a>
             </td>
             <td>{{ row.branch.data.Size | numeraljs:'0.0 b' }}</td>
-            <td>
-                <div class="btn-group pull-right" dropdown is-open="status.isopen">
-                    <button type="button" class="btn btn-info btn-xs dropdown-toggle" ng-disabled="disabled">
-                        Download to... <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu multi-level" role="menu">
-                        <li><a href="#">Download Folder</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-submenu pull-left">
-                            <a href="#">Hauptshare #1</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Subshare #1.1</a></li>
-                                <li><a href="#">Subshare #1.2</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Hauptshare #2</a></li>
-                        <li><a href="#">Hauptshare #3</a></li>
-                    </ul>
-                </div>
+            <td ng-controller="BrowseDownloadCtrl">
+                <button type="button" class="btn btn-primary btn-xs pull-right" ng-click="download(row.branch)" ng-disabled="downloaded">
+                    <span class="glyphicon"
+                          ng-class="downloaded ? 'glyphicon-ok' : 'glyphicon-download-alt'">
+                    </span>
+                    Download
+                </button>
             </td>
         </tr>
     </table>

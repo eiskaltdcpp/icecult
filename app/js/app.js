@@ -2,8 +2,8 @@
 
 /* App Module */
 var REFRESH = {
-    'hash_ratio': 10000,
-    'hub_chat': 10000,
+    'hash_ratio': 12000,
+    'hub_chat': 7500,
     'queues': 10000
 }
 
@@ -63,9 +63,10 @@ EiskaltApp.controller('HubsCtrl', function ($scope, EiskaltRPC) {
     };
     loadHubs();
 
-    $scope.newHubUrl = 'adc://';
     $scope.connect = function (newHubUrl) {
-        EiskaltRPC.HubAdd(newHubUrl).success(loadHubs);
+        if (!angular.isUndefined(newHubUrl) && newHubUrl.length > 3) {
+            EiskaltRPC.HubAdd(newHubUrl).success(loadHubs);
+        }
     };
 
     $scope.disconnect = function (huburl) {
@@ -107,9 +108,10 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, Eis
 
     $scope.newChatMessage = '';
     $scope.sendChatMessage = function () {
-        EiskaltRPC.HubSay($scope.hub.huburl, $scope.newChatMessage);
-        $scope.newChatMessage = '';
-        $scope.refreshChat();
+        EiskaltRPC.HubSay($scope.hub.huburl, $scope.newChatMessage).success(function(data) {
+            $scope.newChatMessage = '';
+            $scope.refreshChat();
+        });
     }
 
     $scope.getFilelist = function (nick) {
@@ -148,11 +150,22 @@ EiskaltApp.controller('FileListCtrl', function ($scope, EiskaltRPC) {
             });
         }
     };
+
+});
+
+EiskaltApp.controller('BrowseDownloadCtrl', function ($scope, EiskaltRPC) {
+    $scope.downloaded = false;
+    $scope.filelist = $scope.$parent.$parent.$parent.filelist;  // TODO: make this better
+
     $scope.download = function(node) {
-        EiskaltRPC.DownloadDirFromList(node.target, '', $scope.filelist).success(function(data) {
-            console.log(data);
-        })
-        console.log('Download', node.target, '', $scope.filelist);
+        var method = node.isFolder ? EiskaltRPC.DownloadDirFromList : EiskaltRPC.DownloadFileFromList;
+        method(node.target, '', $scope.filelist).success(function(status) {
+            if (status == 0) {
+                $scope.downloaded = true;
+            } else {
+                alert('Download failed. May still downloading or already already downloaded?');
+            }
+        });
     };
 });
 

@@ -71,7 +71,25 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('share.del', {directory: directory});
 		},
 		ListShare: function() {
-			return jsonrpc('share.list', {separator: '#'}, true);
+            var promise = jsonrpc('share.list', {separator: '#'});
+            promise.success = function(fn) {
+			    promise.then(function(response) {
+                    var result = response.data.result.replace(/(\r\n|\n|\r)/gm, '');
+                    result = result.replace(/#+$/, '');
+                    result = result.split('#');
+                    var shares = [];
+                    while (result.length) {
+                        var data = result.splice(0, 3);
+                        shares.push({
+                            path: data[0],
+                            name: data[1],
+                            sizeFormatted: data[2]
+                        });
+                    }
+                    fn(shares);
+                });
+		    };
+            return promise;
 		},
 		RefreshShare: function() {
 			return jsonrpc('share.refresh');
@@ -197,7 +215,11 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
             });
         },
         DownloadFileFromList: function(target, downloadto, filelist) {
-            return jsonrpc('list.downloadfile');
+            return jsonrpc('list.downloadfile', {
+                target: target,
+                downloadto: downloadto,
+                filelist: filelist
+            });
         },
         GetItemDescbyTarget: function(target) {
             return jsonrpc('queue.getiteminfo');

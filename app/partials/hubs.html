@@ -4,18 +4,28 @@
         <alert ng-hide="hub.connected">
             Not connected to <strong>{{ hub.huburl }}</strong>. Just added? Reload the page again.
             Maybe you should look into daemon's log.
+            <button class="btn btn-danger btn-xs" type="button" title="Disconnect from this hub" ng-click="disconnect(hub.huburl)">
+                <span class="glyphicon glyphicon-log-out"></span>
+                Disconnect
+            </button>
         </alert>
         <div class="row" ng-show="hub.connected">
             <!-- User List -->
             <ul class="user-list list-group col-sm-3 col-sm-push-9">
                 <li ng-repeat="user in users" class="list-group-item"
                     popover="{{ user.IP }} - {{ user.Connection }} - {{ user.Tag }}" popover-trigger="mouseenter" popover-placement="left">
-                    <button class="btn btn-info btn-xs pull-right" type="button" title="Download {{ user.Nick }}'s Fileist" ng-click="getFilelist(user.Nick)">Browse</button>
+                    <button class="btn btn-info btn-xs pull-right" type="button" title="Download {{ user.Nick }}'s filelist" ng-click="getFilelist(user.Nick)">
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                        Browse
+                    </button>
                     <span class="badge">{{ user.Shared | numeraljs:'0.0 b' }}</span>
 	            <span class="nick" style="color: #{{ user.Nick | stringToColor }}">{{ user.Nick }}</span>
                 </li>
                 <li class="list-group-item pull-right">
-                    <button class="btn btn-danger" type="button" title="Disconnect from this hub" ng-click="disconnect(hub.huburl)">Disconnect</button>
+                    <button class="btn btn-danger btn-xs" type="button" title="Disconnect from this hub" ng-click="disconnect(hub.huburl)">
+                        <span class="glyphicon glyphicon-log-out"></span>
+                        Disconnect
+                    </button>
                 </li>
             </ul>
             <div class="col-sm-9 col-sm-pull-3">
@@ -30,7 +40,10 @@
                     <form ng-submit="sendChatMessage()">
                         <div class="input-group">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">Submit</button>
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                    Submit
+                                </button>
                             </span>
                             <input type="text" class="form-control" ng-model="newChatMessage" placeholder="a chat message">
                         </div>
@@ -41,9 +54,16 @@
     </tab>
     <!-- Add new hub -->
     <tab heading="+">
-        <form role="form">
-            <input type="text" class="form-control" ng-model="newHubUrl">
-            <button type="button" class="btn btn-primary" ng-click="connect(newHubUrl)">Connect</button>
+        <form role="form" ng-submit="connect(newHubUrl)">
+            <div class="form-group">
+                <label for="newHubUrl">Connect to this hub:</label>
+                <input type="text" class="form-control" ng-model="newHubUrl" id="newHubUrl" placeholder="adc://">
+                <p class="help-block">Usually looks like "adc://23.435.34.34:1511" or "adc://some.domain.com:1511".</p>
+            </div>
+            <button type="button" type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-log-in"></span>
+                Connect
+            </button>
         </form>
     </tab>
 </tabset>
