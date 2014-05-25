@@ -5,7 +5,6 @@
                 <th>Name</th>
                 <th>Progress</th>
                 <th>Status</th>
-                <th>Added</th>
                 <th></th>
             </tr>
         </thead>
@@ -13,6 +12,11 @@
             <tr ng-repeat="(key, item) in queue" ng-controller="QueueItemCtrl">
                 <td>
                     {{ item.Filename }}
+                    <div collapse="!collapsed">
+                        <strong>Target:</strong> {{ item.Path }}
+                        <br>
+                        <strong>TTH:</strong> {{ item.TTH }}
+                    </div>
                 </td>
                 <td>
                     <progressbar value="item.Downloaded | extractPercentage">
@@ -20,19 +24,21 @@
                             {{ item.Downloaded }} of {{ item.Size }}
                         </span>
                     </progressbar>
+                    <div collapse="!collapsed">
+                        <strong>Priority:</strong> {{ item.Priority }}
+                        <br>
+                        <strong>Added:</strong> {{ item.Added }}
+                    </div>
                 </td>
                 <td>
                     {{ item.Status }}
                     <div collapse="!collapsed">
-                        Users: {{ item.Users }}
+                        <strong>Users:</strong> {{ item.Users }}
                     </div>
                 </td>
                 <td>
-                    {{ item.Added }}
-                </td>
-                <td>
                     <button class="btn btn-info btn-xs" type="button" title="Show more information"
-                            ng-click="collapsed = !collapsed">
+                            ng-click="collapsed = !collapsed" ng-class="{active: collapsed}">
                         <span class="glyphicon glyphicon-info-sign"></span>
                         Details
                     </button>
