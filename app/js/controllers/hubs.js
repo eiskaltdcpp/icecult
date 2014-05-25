@@ -19,7 +19,7 @@ EiskaltApp.controller('HubsCtrl', function ($scope, EiskaltRPC) {
     };
 });
 
-EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, EiskaltRPC) {
+EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, settings, EiskaltRPC) {
     $scope.hub = $scope.$parent.hub;
 
     EiskaltRPC.GetHubUserList($scope.hub.huburl).success(function (users) {
@@ -36,7 +36,9 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, Eis
         $scope.$storage.chatlog[$scope.hub.huburl] = [];
     } else {
         // clean old messages
-        $scope.$storage.chatlog[$scope.hub.huburl] = $scope.$storage.chatlog[$scope.hub.huburl].slice(-250);
+        $scope.$storage.chatlog[$scope.hub.huburl] = $scope.$storage.chatlog[$scope.hub.huburl].slice(
+            -1 * settings.chatMessagesKept
+        );
     }
     $scope.refreshChat = function () {
         EiskaltRPC.GetChatPub($scope.hub.huburl).success(function (messages) {
@@ -49,7 +51,7 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, Eis
         });
     };
     $scope.refreshChat();
-    var refreshChatTimer = $interval($scope.refreshChat, REFRESH['hub_chat']);
+    var refreshChatTimer = $interval($scope.refreshChat, settings.refresh.chat);
     $scope.$on("$destroy", function(event) {
         $interval.cancel(refreshChatTimer);
     });

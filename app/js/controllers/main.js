@@ -1,6 +1,6 @@
 'use strict';
 
-EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, EiskaltRPC) {
+EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settings, EiskaltRPC) {
     EiskaltRPC.ShowVersion().success(function (data) {
         $scope.version = data;
     });
@@ -14,7 +14,7 @@ EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, Eiskal
         });
     }
     refreshData();
-    var refreshDataTimer = $interval(refreshData, REFRESH['hash_ratio']);
+    var refreshDataTimer = $interval(refreshData, settings.refresh.hashAndRatio);
     $scope.$on("$destroy", function(event) {
         $interval.cancel(refreshDataTimer);
     });
