@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="(key, item) in queue">
+            <tr ng-repeat="(key, item) in queue" ng-controller="QueueItemCtrl">
                 <td>
                     {{ item.Filename }}
                 </td>
@@ -23,11 +23,19 @@
                 </td>
                 <td>
                     {{ item.Status }}
+                    <div collapse="!collapsed">
+                        Users: {{ item.Users }}
+                    </div>
                 </td>
                 <td>
                     {{ item.Added }}
                 </td>
                 <td>
+                    <button class="btn btn-info btn-xs" type="button" title="Show more information"
+                            ng-click="collapsed = !collapsed">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        Details
+                    </button>
                     <button class="btn btn-danger btn-xs" type="button" title="Abort download of this file"
                             ng-click="abort(item)">
                         <span class="glyphicon glyphicon-remove"></span>
