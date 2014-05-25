@@ -2,7 +2,10 @@
 
 EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settings, EiskaltRPC) {
     EiskaltRPC.ShowVersion().success(function (data) {
-        $scope.version = data;
+        $scope.version = {
+            client: settings.version,
+            daemon: data
+        };
     });
 
     var refreshData = function () {
