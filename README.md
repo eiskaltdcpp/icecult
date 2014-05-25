@@ -1,7 +1,7 @@
 icecult
 =======
 
-Alternativ webinterface for [eiskaltdcpp-daemon](https://github.com/eiskaltdcpp/eiskaltdcpp).
+Alternative webinterface for [eiskaltdcpp-daemon](https://github.com/eiskaltdcpp/eiskaltdcpp).
 
 Features:
 * Connect to hubs
@@ -25,3 +25,13 @@ Setup
 -----
 
 Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
+
+Changelog
+---------
+
+* 0.1.1:
+** feature: added queue item details button to show more information
+** feature: show daemon and client version
+
+* 0.1.0:
+** initial version
