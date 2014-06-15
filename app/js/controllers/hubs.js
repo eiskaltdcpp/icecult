@@ -65,7 +65,11 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, set
     }
 
     $scope.getFilelist = function (nick) {
-        EiskaltRPC.GetFileList($scope.hub.huburl, nick);
+        console.log('getFilelist', nick);
+        // close possible old opened filelist
+
+        // trigger filelist download
+        //EiskaltRPC.GetFileList($scope.hub.huburl, nick);
     }
 });
 
@@ -74,6 +78,9 @@ EiskaltApp.controller('UserCtrl', function ($scope, EiskaltRPC) {
 
     $scope.downloadFilelist = function (nick) {
         EiskaltRPC.GetFileList($scope.hub.huburl, nick).success(function(status) {
+            EiskaltApp.ShowOpenedLists().success(function(data) {
+                console.log(data);
+            });
             if (status == 0) {
                 $scope.downloading = true;
             } else {
