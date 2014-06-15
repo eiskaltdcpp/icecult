@@ -23,73 +23,9 @@
     <script src="js/controllers/queue.js"></script>
 </head>
 <body ng-controller="MainCtrl">
-
-<header class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#" title="WebClient: {{ version.client }} - Daemon: {{ version.daemon }}">
-                EiskaltDC++
-            </a>
-        </div>
-
-        <div class="navbar-collapse" collapse="navbarCollapsed">
-            <ul class="nav navbar-nav" ng-click="navbarCollapsed = !navbarCollapsed">
-                <li ng-class="{active:isActive('/hubs')}">
-                    <a href="#/hubs">
-                        <span class="glyphicon glyphicon-home"></span>
-                        Hubs
-                    </a>
-                </li>
-                <li ng-class="{active:isActive('/browse')}">
-                    <a href="#/browse">
-                        <span class="glyphicon glyphicon-folder-open"></span>
-                        Browse
-                    </a>
-                </li>
-                <li ng-class="{active:isActive('/queue')}">
-                    <a href="#/queue">
-                        <span class="glyphicon glyphicon-tasks"></span>
-                        Queue
-                    </a>
-                </li>
-            </ul>
-            <div id="hash-status" class="navbar-right">
-                <div popover="" popover-trigger="mouseenter" popover-placement="bottom" popover-html="true">
-                    <span class="glyphicon glyphicon-hdd"></span>
-                    Hash:
-                    <span class="label"
-                          ng-hide="hashing.status == 'idle'"
-                          ng-class="{'label-info': hashing.status == 'hashing', 'label-warning': hashing.status == 'pause'}">
-                        {{ hashing.status }}
-                    </span>
-                    <button type="button" title="Click to refresh share"
-                            class="btn btn-success btn-xs"
-                            ng-click="refreshShare()"
-                            ng-show="hashing.status == 'idle'">
-                        {{ hashing.status }}
-                    </button>
-                    <span ng-hide="hashing.status == 'idle'">
-                        {{ hashing.bytesleft | numeraljs:'0.0 b' }} left
-                    </span>
-                </div>
-                <div>
-                    <span class="glyphicon glyphicon-transfer"></span>
-                    Up-/Downloaded: {{ ratio.up }} / {{ ratio.down }}
-                </div>
-            </div>
-        </div>
+    <header class="navbar navbar-default navbar-fixed-top" role="navigation" ng-include src="'partials/navbar.html'"></header>
+    <div class="content">
+        <div ng-view class="container"></div>
     </div>
-</header>
-
-<div class="content">
-    <div ng-view class="container"></div>
-</div>
-
 </body>
 </html>
