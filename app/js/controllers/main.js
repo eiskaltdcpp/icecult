@@ -1,6 +1,8 @@
 'use strict';
 
 EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settings, EiskaltRPC) {
+    $scope.navbarCollapsed = true;
+
     EiskaltRPC.ShowVersion().success(function (data) {
         $scope.version = {
             client: settings.version,
