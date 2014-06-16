@@ -36,7 +36,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 		};
 		return promise;
 	}
-	
+
 	return {
         StopDaemon: function() {
 			return jsonrpc('daemon.stop');
@@ -164,7 +164,17 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('hub.getusers', {huburl: huburl, separator: '#'}, true);
 		},
 		GetUserInfo: function(nick, huburl) {
-			return jsonrpc('hub.getuserinfo', {nick: nick, huburl: huburl});
+			var promise = jsonrpc('hub.getuserinfo', {nick: nick, huburl: huburl});
+			promise.success = function(fn) {
+				promise.then(function(response) {
+					var info = response.data.result;
+					// remove space in key "Nick Order"
+					info['NickOrder'] = info['Nick Order'];
+					delete info['Nick Order'];
+					fn(info);
+				});
+			};
+			return promise;
 		},
 		ShowLocalLists: function() {
 			return jsonrpc('list.local', {separator: '#'}, true);

@@ -1,6 +1,12 @@
 'use strict';
 
 EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settings, EiskaltRPC) {
+    $scope.navbarCollapsed = true;
+    $scope.ratio = {
+        bandwidth_up: 0,
+        bandwidth_down: 0
+    };
+
     EiskaltRPC.ShowVersion().success(function (data) {
         $scope.version = {
             client: settings.version,
@@ -12,8 +18,14 @@ EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settin
         EiskaltRPC.GetHashStatus().success(function (data) {
             $scope.hashing = data;
         });
+
         EiskaltRPC.ShowRatio().success(function (data) {
-            $scope.ratio = data;
+            function calcBandwidth(current, last) {
+                return 1000 * (current - last) / settings.refresh.hashAndRatio;
+            }
+            $scope.ratio.bandwidth_up = calcBandwidth(parseInt(data.up_bytes), $scope.ratio.up_bytes);
+            $scope.ratio.bandwidth_down = calcBandwidth(parseInt(data.down_bytes), $scope.ratio.down_bytes);
+            angular.extend($scope.ratio, data);
         });
     }
     refreshData();

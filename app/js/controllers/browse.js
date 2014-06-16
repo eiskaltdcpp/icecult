@@ -3,23 +3,30 @@
 EiskaltApp.controller('BrowseCtrl', function ($scope, EiskaltRPC) {
     EiskaltRPC.ShowLocalLists().success(function (filelists) {
         $scope.filelists = filelists;
-        EiskaltRPC.ShowOpenedLists().success(function (openedFilelists) {
-            angular.forEach($scope.filelists, function (filelist) {
-                if (openedFilelists.indexOf(filelist) < 0) {
-                    EiskaltRPC.OpenFileList(filelist);
-                }
-            });
-        });
     });
 });
 
-EiskaltApp.controller('FileListCtrl', function ($scope, EiskaltRPC) {
+EiskaltApp.controller('FileListCtrl', function ($scope, $timeout, EiskaltRPC) {
     $scope.filelist = $scope.$parent.filelist;
-
     $scope.tree = {}
     $scope.treeData = [];
-    EiskaltRPC.LsDirInList('', $scope.filelist).success(function (data) {
-        $scope.treeData = data;
+
+    var waitForOpening = function() {
+        EiskaltRPC.LsDirInList('', $scope.filelist).success(function (data) {
+            if (data.length > 0) {
+                $scope.treeData = data;
+            } else {
+                // not ready, give it some time
+                $timeout(waitForOpening, 250);
+            }
+        });
+    }
+
+    // open on start
+    EiskaltRPC.OpenFileList($scope.filelist).success(waitForOpening);
+    // close on leave
+    $scope.$on("$destroy", function(event) {
+        EiskaltRPC.CloseFileList($scope.filelist);
     });
 
     $scope.handle = function(node) {

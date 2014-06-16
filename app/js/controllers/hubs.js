@@ -62,11 +62,7 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, set
             $scope.newChatMessage = '';
             $scope.refreshChat();
         });
-    }
-
-    $scope.getFilelist = function (nick) {
-        EiskaltRPC.GetFileList($scope.hub.huburl, nick);
-    }
+    };
 });
 
 EiskaltApp.controller('UserCtrl', function ($scope, EiskaltRPC) {
