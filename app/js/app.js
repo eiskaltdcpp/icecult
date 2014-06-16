@@ -7,7 +7,7 @@ EiskaltApp.value('settings', {
     version: '0.2.0',
     chatMessagesKept: 250,
     refresh: {
-        hashAndRatio: 5000,
+        hashAndRatio: 2000,
         chat: 3000,
         queues: 3000
     }

@@ -53,7 +53,7 @@
             </div>
             <div>
                 <span class="glyphicon glyphicon-transfer"></span>
-                Up-/Downloaded: {{ ratio.up }} / {{ ratio.down }}
+                Up/Down: {{ ratio.bandwidth_up | numeraljs: '0 b':'B' }}/s / {{ ratio.bandwidth_down | numeraljs: '0 b':'B' }}/s
             </div>
         </div>
     </div>
