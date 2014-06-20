@@ -1,13 +1,13 @@
 'use strict';
 
 EiskaltApp.controller('QueueCtrl', function ($scope, $interval, settings, EiskaltRPC) {
-    var refreshQueue = function () {
+    $scope.refreshQueue = function () {
         EiskaltRPC.ListQueue().success(function(queue) {
             $scope.queue = queue;
         });
     };
-    refreshQueue();
-    var refreshQueueTimer = $interval(refreshQueue, settings.refresh.queues);
+    $scope.refreshQueue();
+    var refreshQueueTimer = $interval($scope.refreshQueue, settings.refresh.queues);
     $scope.$on("$destroy", function(event) {
         $interval.cancel(refreshQueueTimer);
     });
@@ -16,6 +16,6 @@ EiskaltApp.controller('QueueCtrl', function ($scope, $interval, settings, Eiskal
 EiskaltApp.controller('QueueItemCtrl', function ($scope, EiskaltRPC) {
     $scope.collapsed = false;
     $scope.abort = function (item) {
-        EiskaltRPC.RemoveQueueItem(item.Target).success(refreshQueue);
+        EiskaltRPC.RemoveQueueItem(item.Target).success($scope.$parent.refreshQueue);
     };
 });
