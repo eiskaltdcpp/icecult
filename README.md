@@ -29,6 +29,9 @@ Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
 Changelog
 ---------
 
+* 0.2.1:
+  * bugfix: Abort buttons in Download queue not functional [#7](/../../issues/7)
+
 * 0.2.0:
   * bugfix: Update of already downloaded filelist not possible [#5](/../../issues/5)
   * bugfix: In mobile view Bootstrap's navbar collapse button without function [#4](/../../issues/4)

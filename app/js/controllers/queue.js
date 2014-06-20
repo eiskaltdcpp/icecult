@@ -13,7 +13,7 @@ EiskaltApp.controller('QueueCtrl', function ($scope, $interval, settings, Eiskal
     });
 });
 
-EiskaltApp.controller('QueueItemCtrl', function ($scope) {
+EiskaltApp.controller('QueueItemCtrl', function ($scope, EiskaltRPC) {
     $scope.collapsed = false;
     $scope.abort = function (item) {
         EiskaltRPC.RemoveQueueItem(item.Target).success(refreshQueue);
