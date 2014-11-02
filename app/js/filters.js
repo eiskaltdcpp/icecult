@@ -28,7 +28,8 @@ EiskaltFilters.filter('chatMessage', function ($sce, $filter) {
 
 EiskaltFilters.filter('extractPercentage', function () {
     return function (input) {
-        return /\((\d+\.\d+)%\)/.exec(input)[1]
+        var m = /\((\d+\.\d+)%\)/.exec(input);
+        return m && m.length > 0 ? m[1] : 0;
     };
 });
 
