@@ -59,9 +59,9 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, set
     $scope.newChatMessage = '';
     $scope.sendChatMessage = function () {
         EiskaltRPC.HubSay($scope.hub.huburl, $scope.newChatMessage).success(function(data) {
-            $scope.newChatMessage = '';
             $scope.refreshChat();
         });
+        $scope.newChatMessage = '';
     };
 });
 
