@@ -32,6 +32,7 @@ Changelog
 * 0.3.0:
   * bugfix: Chat text could be sent multiple times [#8](/../../issues/8)
   * feature: Download queue size visible in status bar [#9](/../../issues/9)
+  * feature: Updated angular and bootstrap versions
 
 * 0.2.1:
   * bugfix: Abort buttons in Download queue not functional [#7](/../../issues/7)
