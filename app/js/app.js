@@ -4,7 +4,7 @@ var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ngSaniti
                                                'angularBootstrapNavTree', 'EiskaltRPC', 'EiskaltFilters']);
 
 EiskaltApp.value('settings', {
-    version: '0.2.0',
+    version: '0.3.0',
     chatMessagesKept: 250,
     refresh: {
         hashAndRatio: 5000,
