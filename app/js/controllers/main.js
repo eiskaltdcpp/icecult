@@ -35,7 +35,7 @@ EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settin
             });
             $scope.queue = {
                 size: queueSize,
-                length: queue.length
+                length: queue ? queue.length : 0
             };
         });
     }
