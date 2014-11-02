@@ -27,6 +27,17 @@ EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settin
             $scope.ratio.bandwidth_down = calcBandwidth(parseInt(data.down_bytes), $scope.ratio.down_bytes);
             angular.extend($scope.ratio, data);
         });
+
+        EiskaltRPC.ListQueue().success(function(queue) {
+            var queueSize = 0;
+            angular.forEach(queue, function(item) {
+                queueSize += parseInt(item['Size Sort']);
+            });
+            $scope.queue = {
+                size: queueSize,
+                length: queue.length
+            };
+        });
     }
     refreshData();
     var refreshDataTimer = $interval(refreshData, settings.refresh.hashAndRatio);

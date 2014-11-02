@@ -32,10 +32,28 @@
                 </a>
             </li>
         </ul>
-        <div id="hash-status" class="navbar-right">
+        <div class="navbar-right navbar-status">
+            <div>
+                <span class="navbar-status-label">
+                    <span class="glyphicon glyphicon-cloud-upload"></span>
+                    Up:
+                </span>
+                {{ ratio.bandwidth_up | numeraljs: '0 b':'B' }}/s
+            </div>
+            <div>
+                <span class="navbar-status-label">
+                    <span class="glyphicon glyphicon-cloud-download"></span>
+                    Down:
+                </span>
+                {{ ratio.bandwidth_down | numeraljs: '0 b':'B' }}/s
+            </div>
+        </div>
+        <div class="navbar-right navbar-status">
             <div popover="" popover-trigger="mouseenter" popover-placement="bottom" popover-html="true">
-                <span class="glyphicon glyphicon-hdd"></span>
-                Hash:
+                <span class="navbar-status-label">
+                    <span class="glyphicon glyphicon-hdd"></span>
+                    Hash:
+                </span>
                 <span class="label"
                       ng-hide="hashing.status == 'idle'"
                       ng-class="{'label-info': hashing.status == 'hashing', 'label-warning': hashing.status == 'pause'}">
@@ -52,8 +70,11 @@
                 </span>
             </div>
             <div>
-                <span class="glyphicon glyphicon-transfer"></span>
-                Up/Down: {{ ratio.bandwidth_up | numeraljs: '0 b':'B' }}/s / {{ ratio.bandwidth_down | numeraljs: '0 b':'B' }}/s
+                <span class="navbar-status-label">
+                    <span class="glyphicon glyphicon-tasks"></span>
+                    Queue:
+                </span>
+                {{ queue.size | numeraljs:'0.0 b' }}
             </div>
         </div>
     </div>

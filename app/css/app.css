@@ -7,8 +7,20 @@
     margin-top: 55px;
 }
 
-#hash-status {
-    margin: 5px 25px;
+.navbar-status {
+    margin: 4px 25px;
+}
+
+.navbar-status-label {
+    width: 75px;
+    display: block;
+    float: left;
+}
+
+.navbar-status span.label,
+.navbar-status button.button {
+    padding-bottom: 0;
+    padding-top: 0;
 }
 
 #queue .progress {
