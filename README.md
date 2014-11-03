@@ -29,6 +29,9 @@ Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
 Changelog
 ---------
 
+* 0.4.0:
+  * feature: show available updates in statusbar
+
 * 0.3.0:
   * bugfix: Chat text could be sent multiple times [#8](/../../issues/8)
   * feature: Download queue size visible in status bar [#9](/../../issues/9)
