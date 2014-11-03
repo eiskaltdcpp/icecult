@@ -1,6 +1,6 @@
 'use strict';
 
-EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settings, EiskaltRPC) {
+EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settings, EiskaltRPC, UpdateCheck) {
     $scope.navbarCollapsed = true;
     $scope.ratio = {
         bandwidth_up: 0,
@@ -12,6 +12,9 @@ EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settin
             client: settings.version,
             daemon: data
         };
+        UpdateCheck.getNewerVersion($scope.version).success(function(newerVersion) {
+            $scope.newerVersion = newerVersion;
+        });
     });
 
     var refreshData = function () {

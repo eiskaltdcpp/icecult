@@ -77,5 +77,19 @@
                 {{ queue.size | numeraljs:'0.0 b' }}
             </div>
         </div>
+        <div class="navbar-right navbar-status" ng-show="newerVersion">
+            <div>
+                <span class="navbar-status-label">
+                    <span class="glyphicon glyphicon-check"></span>
+                    Update available:
+                </span>
+                {{ newerVersion.name }}
+            </div>
+            <div>
+                <a href="{{ newerVersion.html_url }}" target="_blank">
+                    Download
+                </a>
+            </div>
+        </div>
     </div>
 </div>

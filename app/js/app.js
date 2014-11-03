@@ -1,10 +1,11 @@
 'use strict';
 
 var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ngSanitize', 'luegg.directives', 'ui.bootstrap',
-                                               'angularBootstrapNavTree', 'EiskaltRPC', 'EiskaltFilters']);
+                                               'angularBootstrapNavTree', 'UpdateCheck', 'EiskaltRPC', 'EiskaltFilters']);
 
 EiskaltApp.value('settings', {
     version: '0.3.0',
+    updateUrl: 'https://api.github.com/repos/kraiz/icecult/releases',
     chatMessagesKept: 250,
     refresh: {
         hashAndRatio: 5000,

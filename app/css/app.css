@@ -12,7 +12,7 @@
 }
 
 .navbar-status-label {
-    width: 75px;
+    min-width: 75px;
     display: block;
     float: left;
 }
