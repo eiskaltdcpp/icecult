@@ -23,6 +23,14 @@
     padding-top: 0;
 }
 
+#queue .name-cell {
+    width: 630px;
+}
+
+#queue td:first-of-type {
+    word-break: break-word;
+}
+
 #queue .progress-cell {
     width: 210px;
 }
