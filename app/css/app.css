@@ -23,6 +23,18 @@
     padding-top: 0;
 }
 
+#queue .progress-cell {
+    width: 210px;
+}
+
+#queue .status-cell {
+    width: 150px;
+}
+
+#queue .button-cell {
+    width: 140px;
+}
+
 #queue .progress {
     margin: 0px;
 }
