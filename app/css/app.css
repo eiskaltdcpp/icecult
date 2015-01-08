@@ -23,12 +23,25 @@
     padding-top: 0;
 }
 
-#queue .name-cell {
-    width: 630px;
+@media (min-width: 768px) {
+    #queue .name-cell {
+        width: 210px;
+    }
+
+}
+@media (min-width: 992px) {
+    #queue .name-cell {
+        width: 430px;
+    }
+}
+@media (min-width: 1200px) {
+    #queue .name-cell {
+        width: 630px;
+    }
 }
 
 #queue td:first-of-type {
-    word-break: break-word;
+    word-break: break-all;
 }
 
 #queue .progress-cell {
