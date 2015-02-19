@@ -5,9 +5,7 @@ angular.module('UpdateCheck', []).factory('UpdateCheck', function($http, setting
     var api = settings.updateUrl + '?callback=JSON_CALLBACK';
 
     var find = function(arr, name) {
-        console.log(name, arr);
         var filtered = arr.filter(function(e) { return e.name === name});
-        console.log(filtered);
         return filtered.length ? filtered[0] : null
     }
 
