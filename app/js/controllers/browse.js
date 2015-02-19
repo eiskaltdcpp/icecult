@@ -7,7 +7,6 @@ EiskaltApp.controller('BrowseCtrl', function ($scope, EiskaltRPC) {
 });
 
 EiskaltApp.controller('FileListCtrl', function ($scope, $timeout, EiskaltRPC) {
-    $scope.filelist = $scope.$parent.filelist;
     $scope.tree = {}
     $scope.treeData = [];
 

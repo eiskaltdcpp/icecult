@@ -20,8 +20,6 @@ EiskaltApp.controller('HubsCtrl', function ($scope, EiskaltRPC) {
 });
 
 EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, settings, EiskaltRPC) {
-    $scope.hub = $scope.$parent.hub;
-
     EiskaltRPC.GetHubUserList($scope.hub.huburl).success(function (users) {
         $scope.users = [];
         angular.forEach(users, function (user) {
