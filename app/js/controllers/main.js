@@ -55,4 +55,8 @@ EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settin
     $scope.refreshShare = function () {
         EiskaltRPC.RefreshShare().success(refreshData);
     }
+
+    $scope.toggleHashing = function () {
+        EiskaltRPC.PauseHash().success(refreshData);
+    }
 });

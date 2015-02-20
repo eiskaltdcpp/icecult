@@ -54,18 +54,19 @@
                     <span class="glyphicon glyphicon-hdd"></span>
                     Hash:
                 </span>
-                <span class="label"
-                      ng-hide="hashing.status == 'idle'"
-                      ng-class="{'label-info': hashing.status == 'hashing', 'label-warning': hashing.status == 'pause'}">
-                    {{ hashing.status }}
-                </span>
-                <button type="button" title="Click to refresh share"
-                        class="btn btn-success btn-xs"
-                        ng-click="refreshShare()"
-                        ng-show="hashing.status == 'idle'">
+                <button type="button" class="btn btn-xs btn-info" title="Click to pause"
+                        ng-show="hashing.status == 'hashing'" ng-click="toggleHashing()">
                     {{ hashing.status }}
                 </button>
-                <span ng-hide="hashing.status == 'idle'">
+                <button type="button" class="btn btn-xs btn-warning" title="Click to resume"
+                        ng-show="hashing.status == 'pause'" ng-click="toggleHashing()">
+                    {{ hashing.status }}
+                </button>
+                <button type="button" class="btn btn-xs btn-success" title="Click to refresh share"
+                        ng-show="hashing.status == 'idle'" ng-click="refreshShare()">
+                    {{ hashing.status }}
+                </button>
+                <span ng-show="hashing.status == 'hashing' || hashing.status == 'pause'">
                     {{ hashing.bytesleft | numeraljs:'0.0 b' }} left
                 </span>
             </div>
