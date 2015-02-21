@@ -11,7 +11,16 @@ EiskaltApp.value('settings', {
         hashAndRatio: 5000,
         chat: 3000,
         queues: 3000
-    }
+    },
+    settings: [
+        {key: 'Nick', type: 'text'},
+        {key: 'Description', type: 'text'},
+        {key: 'ExternalIp', type: 'text'},
+        {key: 'MaxUploadSpeedMain', type: 'number', suffix: 'kB/s'},
+        {key: 'MaxDownloadSpeedMain', type: 'number', suffix: 'kB/s'},
+        {key: 'DownloadDirectory', type: 'text'},
+        {key: 'TempDownloadDirectory', type: 'text'},
+    ]
 });
 
 EiskaltApp.config(function ($routeProvider) {
@@ -27,6 +36,10 @@ EiskaltApp.config(function ($routeProvider) {
         .when('/queue', {
             controller: 'QueueCtrl',
             templateUrl: 'partials/queue.html'
+        })
+        .when('/settings', {
+            controller: 'SettingsCtrl',
+            templateUrl: 'partials/settings.html'
         })
         .otherwise({redirectTo: '/hubs'});
 });

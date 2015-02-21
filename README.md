@@ -29,6 +29,15 @@ Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
 Changelog
 ---------
 
+* upcoming:
+  * feature: added settings tab
+  * feature: enabled possibility to pause/resume hashing
+  * feature: updated angular to 1.3.13 and bootstrap to 3.3.2
+  * bugfix: another error in update check
+
+* 0.4.1:
+  * bugfix: error in update check
+
 * 0.4.0:
   * feature: show available updates in statusbar
 

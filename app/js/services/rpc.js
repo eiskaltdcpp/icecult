@@ -57,7 +57,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('hub.pm', {huburl: huburl, nick: nick, message: message});
 		},
 		ListHubs: function() {
-			return jsonrpc('hub.list', {separator: '#'}, true);
+			return jsonrpc('hub.list', {separator: '┴'}, true);
 		},
 		AddDirInShare: function(directory, virtname) {
 			return jsonrpc('share.add', {directory: directory, virtname: virtname});
@@ -69,12 +69,12 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('share.del', {directory: directory});
 		},
 		ListShare: function() {
-            var promise = jsonrpc('share.list', {separator: '#'});
+            var promise = jsonrpc('share.list', {separator: '┴'});
             promise.success = function(fn) {
 			    promise.then(function(response) {
                     var result = response.data.result.replace(/(\r\n|\n|\r)/gm, '');
-                    result = result.replace(/#+$/, '');
-                    result = result.split('#');
+                    result = result.replace(/┴+$/, '');
+                    result = result.split('┴');
                     var shares = [];
                     while (result.length) {
                         var data = result.splice(0, 3);
@@ -96,7 +96,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('list.download', {huburl: huburl, nick: nick});
 		},
 		GetChatPub: function(huburl) {
-			return jsonrpc('hub.getchat', {huburl: huburl, separator: '#'}, true);
+			return jsonrpc('hub.getchat', {huburl: huburl, separator: '┴'}, true);
 		},
 		SendSearch: function(searchstring, searchtype, sizemode, sizetype, size, huburls) {
 			return jsonrpc('search.send', { searchstring: searchstring, searchtype: searchtype, sizemode: sizemode, sizetype: sizetype, size: size, huburls: huburls});
@@ -120,7 +120,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('queue.remove', {target: target});
 		},
 		ListQueueTargets: function() {
-			return jsonrpc('queue.listtargets', {separator: '#'}, true);
+			return jsonrpc('queue.listtargets', {separator: '┴'}, true);
 		},
 		ListQueue: function() {
 			return jsonrpc('queue.list');
@@ -132,7 +132,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('queue.add', {directory: directory, tth: tth, filename: filename, size: size});
 		},
 		GetSourcesItem: function(target) {
-			return jsonrpc('queue.getsources', {target: target, separator: '#'}, true);
+			return jsonrpc('queue.getsources', {target: target, separator: '┴'}, true);
 		},
 		GetHashStatus: function() {
 			return jsonrpc('hash.status');
@@ -161,7 +161,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
             return promise;
 		},
 		GetHubUserList: function(huburl) {
-			return jsonrpc('hub.getusers', {huburl: huburl, separator: '#'}, true);
+			return jsonrpc('hub.getusers', {huburl: huburl, separator: '┴'}, true);
 		},
 		GetUserInfo: function(nick, huburl) {
 			var promise = jsonrpc('hub.getuserinfo', {nick: nick, huburl: huburl});
@@ -177,7 +177,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return promise;
 		},
 		ShowLocalLists: function() {
-			return jsonrpc('list.local', {separator: '#'}, true);
+			return jsonrpc('list.local', {separator: '┴'}, true);
 		},
 		GetClientFileList: function(filelist) {
 			return jsonrpc('queue.listtargets', {filelist: filelist});
@@ -192,7 +192,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('list.closeall');
 		},
 		ShowOpenedLists: function() {
-			return jsonrpc('list.listopened', {separator: '#'}, true);
+			return jsonrpc('list.listopened', {separator: '┴'}, true);
 		},
 		LsDirInList: function(directory, filelist) {
             if (directory.length > 0) {
@@ -231,6 +231,22 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
         },
         GetItemDescbyTarget: function(target) {
             return jsonrpc('queue.getiteminfo');
+        },
+        QueueClear: function() {
+            return jsonrpc('queue.clear');
+        },
+        SettingsGetSet: function(key, value) {
+            var promise = jsonrpc('settings.getset', {key: key, value: value});
+			promise.success = function(fn) {
+				promise.then(function(response) {
+					if (angular.isDefined(value)) { // set
+                        fn(response.data.result !== 1);
+                    } else { // get
+                        fn(response.data.result.value);
+                    }
+				});
+			};
+			return promise;
         }
     };
 });
