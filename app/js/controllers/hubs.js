@@ -40,12 +40,7 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, set
     }
     $scope.refreshChat = function () {
         EiskaltRPC.GetChatPub($scope.hub.huburl).success(function (messages) {
-            angular.forEach(messages, function (message) {
-                $scope.$storage.chatlog[$scope.hub.huburl].push({
-                    time: new Date(),
-                    text: message
-                });
-            })
+            Array.prototype.push.apply($scope.$storage.chatlog[$scope.hub.huburl], messages);
         });
     };
     $scope.refreshChat();

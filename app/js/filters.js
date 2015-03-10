@@ -9,23 +9,6 @@ EiskaltFilters.filter('numeraljs', function () {
     };
 });
 
-EiskaltFilters.filter('chatMessage', function ($sce, $filter) {
-    return function (message) {
-        var text = message.text;
-        var userPattern = /<\s*([^>]*)\s*>/i;
-        var userMatches = text.match(userPattern);
-        var color = '000000';
-
-        if (userMatches.length > 1) {
-            color = $filter('stringToColor')(userMatches[1]);
-        }
-
-        text = text.replace(userPattern, '<span class="nick" style="color: #' + color + ';">&lt;$1&gt;</span>');
-        text = text.replace(/^(\[\s*[0-9]+:[0-9]+:[0-9]+\s*\])/i, '<span class="time">$1</span>');
-        return $sce.trustAsHtml(text);
-    };
-});
-
 EiskaltFilters.filter('extractPercentage', function () {
     return function (input) {
         var m = /\((\d+\.\d+)%\)/.exec(input);
@@ -50,7 +33,7 @@ EiskaltFilters.filter('stringToColor', function() {
         } else if (color.length > 6) {
             color = color.slice(0, 6);
         }
-        return color;
+        return '#' + color;
     }
 });
 

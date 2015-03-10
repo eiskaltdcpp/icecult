@@ -24,7 +24,7 @@
                         {{ downloading && 'Downloading' || 'Browse' }}
                     </button>
                     <span class="badge">{{ user.Shared | numeraljs:'0.0 b' }}</span>
-	            <span class="nick" style="color: #{{ user.Nick | stringToColor }}">{{ user.Nick }}</span>
+	            <span class="nick" style="color: {{ user.Nick | stringToColor }}">{{ user.Nick }}</span>
                 </li>
                 <li class="list-group-item pull-right">
                     <button class="btn btn-danger btn-xs" type="button" title="Disconnect from this hub"
@@ -38,8 +38,11 @@
                 <!-- Chat Log -->
                 <div class="row">
                     <ul class="chat col-sm-12" scroll-glue>
-                        <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index"
-                            ng-bind-html="message | chatMessage"></li>
+                        <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index">
+                            <span class="time">{{ message.time }}</span>
+                            <span class="nick" style="color: {{ message.nick | stringToColor }}">&lt;{{ message.nick }}&gt;</span>
+                            <span class="text">{{ message.text }}</span>
+                        </li>
                     </ul>
                 </div>
                 <!-- Message Submit -->

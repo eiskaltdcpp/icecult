@@ -75,6 +75,10 @@ ul.chat {
                       -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%);
 }
 
+ul.chat span.text {
+    white-space: pre;
+}
+
 ul.user-list .badge {
     margin-top: 2px;
     margin-right: 5px;

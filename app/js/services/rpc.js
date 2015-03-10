@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
+angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http, $q) {
 	// private base function with success wrapper that handle list results
 	var jsonrpc = function(method, parameters, isSeperatedList) {
 		var promise = $http.post(
@@ -96,7 +96,20 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http) {
 			return jsonrpc('list.download', {huburl: huburl, nick: nick});
 		},
 		GetChatPub: function(huburl) {
-			return jsonrpc('hub.getchat', {huburl: huburl, separator: '┴'}, true);
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            jsonrpc('hub.getchat', {huburl: huburl, separator: '┴'}, true).success(function(messages) {
+                deferred.resolve(messages.map(function(msg) {
+                    var match = msg.match(/^(\[\s*[0-9]+:[0-9]+:[0-9]+\s*\])\s*<\s*([^>]*)\s*>\s*(.*)$/);
+                    return {
+                        time: match[1],
+                        nick: match[2],
+                        text: match[3]
+                    }
+                }));
+            });
+            promise.success = promise.then;
+            return promise;
 		},
 		SendSearch: function(searchstring, searchtype, sizemode, sizetype, size, huburls) {
 			return jsonrpc('search.send', { searchstring: searchstring, searchtype: searchtype, sizemode: sizemode, sizetype: sizetype, size: size, huburls: huburls});
