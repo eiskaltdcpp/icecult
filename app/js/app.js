@@ -4,7 +4,7 @@ var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ngSaniti
                                                'angularBootstrapNavTree', 'UpdateCheck', 'EiskaltRPC', 'EiskaltFilters']);
 
 EiskaltApp.value('settings', {
-    version: '0.5.0',
+    version: '0.5.1',
     localStorageVersion: 2,
     updateUrl: 'https://api.github.com/repos/kraiz/icecult/releases',
     chatMessagesKept: 250,
