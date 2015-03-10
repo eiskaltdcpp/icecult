@@ -29,6 +29,11 @@ Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
 Changelog
 ---------
 
+* 0.5.1:
+  * feature: updated angular to 1.3.14
+  * feature: added localstorage versioning
+  * bugfix: proper html escaping of chat messages [#14](/../../issues/14)
+
 * 0.5.0:
   * feature: added settings tab
   * feature: enabled possibility to pause/resume hashing
