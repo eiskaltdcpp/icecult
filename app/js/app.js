@@ -5,6 +5,7 @@ var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ngSaniti
 
 EiskaltApp.value('settings', {
     version: '0.5.0',
+    localStorageVersion: 2,
     updateUrl: 'https://api.github.com/repos/kraiz/icecult/releases',
     chatMessagesKept: 250,
     refresh: {
@@ -42,4 +43,13 @@ EiskaltApp.config(function ($routeProvider) {
             templateUrl: 'partials/settings.html'
         })
         .otherwise({redirectTo: '/hubs'});
+});
+
+EiskaltApp.run(function($localStorage, settings) {
+    // every time the localStorageVersion changes clear the localStorage as data structure has changed
+    var localStorage = $localStorage.$default({version: settings.localStorageVersion});
+    if (localStorage.version < settings.localStorageVersion) {
+        $localStorage.$reset();
+        $localStorage.$default({version: settings.localStorageVersion});
+    }
 });
