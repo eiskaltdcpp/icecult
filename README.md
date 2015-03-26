@@ -28,6 +28,8 @@ Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
 
 Changelog
 ---------
+* upcoming:
+  *  feature: enlargeable chat [#15](/../../issues/15) / [#16](/../../issues/16) (thx [@mmrose](https://github.com/mmrose))
 
 * 0.5.1:
   * feature: updated angular to 1.3.14
