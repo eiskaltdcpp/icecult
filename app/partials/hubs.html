@@ -14,8 +14,6 @@
             <!-- User List -->
             <ul class="user-list list-group"
                 ng-class="enlargedChat ? 'col-sm-1 col-sm-push-11' : 'col-sm-3 col-sm-push-9'">
-                <li class="list-group-item pull-right">
-                </li>
                 <li ng-repeat="user in users | orderBy:'NickOrder' " class="list-group-item" ng-controller="UserCtrl"
                     popover="{{ user.IP }} - {{ user.Connection }} - {{ user.Tag }}"
                     popover-trigger="mouseenter" popover-placement="left"
