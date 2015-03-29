@@ -28,10 +28,9 @@ Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
 
 Changelog
 ---------
-* upcoming:
-  * feature: auto scaling chat size window
+* 0.5.2:
   * feature: enlargeable chat [#15](/../../issues/15) / [#16](/../../issues/16) (thx [@mmrose](https://github.com/mmrose))
-  * feature: improved user popover
+  * feature: improved ui: auto scaling chat size window, better tooltips in user list, responsive navigation
   * bugfix: only partial filelist displayed in browse view
 
 * 0.5.1:
