@@ -1,7 +1,8 @@
 'use strict';
 
 var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ngSanitize', 'luegg.directives', 'ui.bootstrap',
-                                               'angularBootstrapNavTree', 'UpdateCheck', 'EiskaltRPC', 'EiskaltFilters']);
+                                               'angularBootstrapNavTree', 'UpdateCheck', 'EiskaltRPC', 'EiskaltFilters',
+                                               'EiskaltDirectives']);
 
 EiskaltApp.value('settings', {
     version: '0.5.1',

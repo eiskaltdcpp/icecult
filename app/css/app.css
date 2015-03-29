@@ -5,6 +5,7 @@
 
 .content {
     margin-top: 55px;
+    margin-bottom: 48px;
 }
 
 .navbar-status {
@@ -15,6 +16,10 @@
     min-width: 75px;
     display: block;
     float: left;
+}
+
+.navbar-fixed-bottom .input-group {
+    margin-top: 7px;
 }
 
 .browse-tabset .loading {
@@ -65,7 +70,6 @@ ul.chat {
     list-style: none;
     display: block;
     position: relative;
-    height: 600px;
     overflow: auto;
 }
 

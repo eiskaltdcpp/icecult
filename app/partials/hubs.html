@@ -52,7 +52,7 @@
             <div ng-class="enlargedChat ? 'col-sm-11 col-sm-pull-1' : 'col-sm-9 col-sm-pull-3'">
                 <!-- Chat Log -->
                 <div class="row">
-                    <ul class="chat col-sm-12" scroll-glue>
+                    <ul class="chat col-sm-12" max-height="navbar nav-tabs" max-height-offset="12" scroll-glue>
                         <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index">
                             <span class="time">{{ message.time }}</span>
                             <span class="nick" style="color: {{ message.nick | stringToColor }}">&lt;{{ message.nick }}&gt;</span>
@@ -61,20 +61,22 @@
                     </ul>
                 </div>
                 <!-- Message Submit -->
-                <div class="row">
-                    <form ng-submit="sendChatMessage()">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                    Submit
-                                </button>
-                            </span>
-                            <input type="text" class="form-control" ng-model="newChatMessage"
-                                   placeholder="a chat message">
-                        </div>
-                    </form>
-                </div>
+                <nav class="navbar navbar-default navbar-fixed-bottom">
+                    <div class="container">
+                        <form ng-submit="sendChatMessage()">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="glyphicon glyphicon-comment"></span>
+                                        Submit
+                                    </button>
+                                </span>
+                                <input type="text" class="form-control" ng-model="newChatMessage"
+                                       placeholder="a chat message">
+                            </div>
+                        </form>
+                    </div>
+                </nav>
             </div>
         </div>
     </tab>
