@@ -3,11 +3,15 @@
     Look into the <a href="#/queue">Download-Queue</a>.
 </alert>
 
-<tabset class="browse-tabset">
-    <tab ng-repeat="filelist in filelists" heading="{{ filelist | filelist2user }}" ng-controller="FileListCtrl">
-        <p class="text-center loading" ng-hide="treeData.length">
-            <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
-        </p>
+<tabset>
+    <tab ng-repeat="filelist in filelists" ng-controller="FileListCtrl">
+        <tab-heading>
+            {{ filelist | filelist2user }}
+            <i class="clickable glyphicon glyphicon-refresh"
+               ng-class="{'glyphicon-spin':!loadingComplete}"
+               ng-click="loadFilelist()"
+               title="Click to load again"></i>
+        </tab-heading>
         <abn-tree tree-data="treeData" tree-control="tree" on-select="handle(branch)"></abn-tree>
     </tab>
 </tabset>

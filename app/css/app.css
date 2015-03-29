@@ -22,8 +22,8 @@
     margin-top: 7px;
 }
 
-.browse-tabset .loading {
-    margin-top: 20px;
+.clickable.glyphicon {
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {
