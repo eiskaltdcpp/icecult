@@ -17,6 +17,10 @@
     float: left;
 }
 
+.browse-tabset .loading {
+    margin-top: 20px;
+}
+
 @media (min-width: 768px) {
     #queue .name-cell {
         width: 210px;

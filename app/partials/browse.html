@@ -3,9 +3,9 @@
     Look into the <a href="#/queue">Download-Queue</a>.
 </alert>
 
-<tabset>
+<tabset class="browse-tabset">
     <tab ng-repeat="filelist in filelists" heading="{{ filelist | filelist2user }}" ng-controller="FileListCtrl">
-        <p class="text-center" ng-hide="treeData.length">
+        <p class="text-center loading" ng-hide="treeData.length">
             <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
         </p>
         <abn-tree tree-data="treeData" tree-control="tree" on-select="handle(branch)"></abn-tree>
