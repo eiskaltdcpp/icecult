@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#" title="WebClient: {{ version.client }} - Daemon: {{ version.daemon }}">
+        <a class="navbar-brand" href="#/" title="WebClient: {{ version.client }} - Daemon: {{ version.daemon }}">
             EiskaltDC++
         </a>
     </div>
@@ -16,25 +16,25 @@
             <li ng-class="{active:isActive('/hubs')}">
                 <a href="#/hubs">
                     <span class="glyphicon glyphicon-home"></span>
-                    Hubs
+                    <span class="hidden-sm">Hubs</span>
                 </a>
             </li>
             <li ng-class="{active:isActive('/queue')}">
                 <a href="#/queue">
                     <span class="glyphicon glyphicon-tasks"></span>
-                    Queue
+                    <span class="hidden-sm">Queue</span>
                 </a>
             </li>
             <li ng-class="{active:isActive('/browse')}">
                 <a href="#/browse">
                     <span class="glyphicon glyphicon-folder-open"></span>
-                    Browse
+                    <span class="hidden-sm">Browse</span>
                 </a>
             </li>
             <li ng-class="{active:isActive('/settings')}">
                 <a href="#/settings">
                     <span class="glyphicon glyphicon-cog"></span>
-                    Settings
+                    <span class="hidden-sm">Settings</span>
                 </a>
             </li>
         </ul>
