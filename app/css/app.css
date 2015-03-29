@@ -17,12 +17,6 @@
     float: left;
 }
 
-.navbar-status span.label,
-.navbar-status button.button {
-    padding-bottom: 0;
-    padding-top: 0;
-}
-
 @media (min-width: 768px) {
     #queue .name-cell {
         width: 210px;
@@ -69,10 +63,6 @@ ul.chat {
     position: relative;
     height: 600px;
     overflow: auto;
-    /*padding: 10px 15px;*/
-    /*border: 1px solid #ddd;*/
-    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%);
-                      -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 0%);
 }
 
 ul.chat span.text {
