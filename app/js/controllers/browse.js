@@ -10,19 +10,19 @@ EiskaltApp.controller('FileListCtrl', function ($scope, $timeout, EiskaltRPC) {
     $scope.tree = {}
     $scope.treeData = [];
 
-    var waitForOpening = function() {
-        EiskaltRPC.LsDirInList('', $scope.filelist).success(function (data) {
-            if (data.length > 0) {
-                $scope.treeData = data;
-            } else {
-                // not ready, give it some time
-                $timeout(waitForOpening, 250);
-            }
-        });
-    }
-
     // open on start
-    EiskaltRPC.OpenFileList($scope.filelist).success(waitForOpening);
+    EiskaltRPC.OpenFileList($scope.filelist).success(function() {
+        // loading big filelists can be slow and on slim servers.
+        // as we don't have a clue, if the result is complete, we just give it some time.
+        $timeout(
+            function() {
+                EiskaltRPC.LsDirInList('', $scope.filelist).success(function (data) {
+                    $scope.treeData = data;
+                });
+            },
+            1000
+        );
+    });
     // close on leave
     $scope.$on("$destroy", function(event) {
         EiskaltRPC.CloseFileList($scope.filelist);
