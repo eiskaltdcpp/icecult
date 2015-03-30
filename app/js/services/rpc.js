@@ -136,7 +136,19 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http, $q) {
 			return jsonrpc('queue.listtargets', {separator: '┴'}, true);
 		},
 		ListQueue: function() {
-			return jsonrpc('queue.list');
+            const priorityOrder = ['Paused', 'Lowest', 'Low', 'Normal', 'High', 'Highest'];
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            jsonrpc('queue.list').success(function(queue) {
+                var result = [];
+                angular.forEach(queue, function(value) {
+                    value.PriorityOrder = priorityOrder.indexOf(value.Priority);
+                    this.push(value);
+                }, result);
+                deferred.resolve(result);
+            });
+            promise.success = promise.then;
+            return promise;
 		},
 		ClearSearchResults: function(huburl) {
 			return jsonrpc('search.clear', {huburl: huburl});
