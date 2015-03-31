@@ -35,7 +35,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http, $q) {
 			});
 		};
 		return promise;
-	}
+	};
 
 	return {
         StopDaemon: function() {
@@ -255,7 +255,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http, $q) {
             });
         },
         GetItemDescbyTarget: function(target) {
-            return jsonrpc('queue.getiteminfo');
+            return jsonrpc('queue.getiteminfo', {target: target});
         },
         QueueClear: function() {
             return jsonrpc('queue.clear');
