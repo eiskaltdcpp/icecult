@@ -19,7 +19,7 @@ EiskaltApp.controller('HubsCtrl', function ($scope, EiskaltRPC) {
     };
 });
 
-EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, settings, EiskaltRPC) {
+EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, settings, EiskaltRPC, DesktopNotification) {
     EiskaltRPC.GetHubUserList($scope.hub.huburl).success(function (users) {
         $scope.users = [];
         angular.forEach(users, function (user) {
@@ -40,7 +40,10 @@ EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, set
     }
     $scope.refreshChat = function () {
         EiskaltRPC.GetChatPub($scope.hub.huburl).success(function (messages) {
-            Array.prototype.push.apply($scope.$storage.chatlog[$scope.hub.huburl], messages);
+            if (messages.length > 0) {
+                DesktopNotification.notifyChat($scope.hub, messages);
+                Array.prototype.push.apply($scope.$storage.chatlog[$scope.hub.huburl], messages);
+            }
         });
     };
     $scope.refreshChat();

@@ -2,13 +2,14 @@
 
 var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ngSanitize', 'luegg.directives', 'ui.bootstrap',
                                                'angularBootstrapNavTree', 'UpdateCheck', 'EiskaltRPC', 'EiskaltFilters',
-                                               'EiskaltDirectives']);
+                                               'EiskaltDirectives', 'DesktopNotification']);
 
 EiskaltApp.value('settings', {
     version: '0.5.2',
     localStorageVersion: 2,
     updateUrl: 'https://api.github.com/repos/kraiz/icecult/releases',
     chatMessagesKept: 250,
+    notificationTimeout: 5000,
     refresh: {
         hashAndRatio: 5000,
         chat: 3000,
