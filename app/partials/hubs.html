@@ -19,15 +19,17 @@
                     popover-trigger="mouseenter"
                     popover-placement="left"
                     ng-hide="largeChat">
+                    <span class="nick" style="color: {{ user.Nick | stringToColor }}">{{ user.Nick }}</span>
                     <button class="btn btn-primary btn-xs pull-right" type="button"
                             title="Download {{ user.Nick }}'s filelist"
                             ng-click="downloadFilelist(user.Nick)"
                             ng-disabled="downloading">
                         <span class="glyphicon" ng-class="downloading ? 'glyphicon-ok' : 'glyphicon-list-alt'"></span>
-                        {{ downloading && 'Downloading' || 'Browse' }}
+                        <span class="hidden-sm">{{ downloading && 'Downloading' || 'Browse' }}</span>
                     </button>
-                    <span class="badge">{{ user.Shared | numeraljs:'0.0 b' }}</span>
-                    <span class="nick" style="color: {{ user.Nick | stringToColor }}">{{ user.Nick }}</span>
+                    <span class="badge hidden-sm" title="{{ user.Shared | numeraljs: '0.000 b' }}">
+                        {{ user.Shared | numeraljs:'0.0 b' }}
+                    </span>
                 </li>
                 <li class="list-group-item">
                     <button class="btn btn-danger btn-xs" type="button" title="Disconnect from this hub"
@@ -38,7 +40,7 @@
                     </button>
                     <button class="btn btn-default btn-xs pull-right" type="button" title="Enlarge chat"
                             ng-click="largeChat = !largeChat">
-                        Enlarge chat
+                        <span class="hidden-sm">Enlarge chat</span>
                         <span class="glyphicon glyphicon-triangle-right"></span>
                     </button>
                 </li>
