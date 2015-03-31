@@ -12,7 +12,7 @@ EiskaltApp.value('settings', {
     refresh: {
         hashAndRatio: 5000,
         chat: 3000,
-        queues: 3000
+        queues: 5000
     },
     settings: [
         {key: 'Nick', type: 'text'},
