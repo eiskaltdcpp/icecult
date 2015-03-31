@@ -35,15 +35,29 @@
                     {{ item.Status }}
                     <div collapse="!collapsed">
                         <strong>Users:</strong> {{ item.Users }}
+                        <br>
+                        <strong>Prio:</strong> {{ item.Priority }}
                     </div>
                 </td>
                 <td>
                     <button class="btn btn-info btn-xs" type="button" title="Show more information"
                             ng-click="collapsed = !collapsed" ng-class="{active: collapsed}">
-                        <span class="glyphicon glyphicon-info-sign"></span>
+                        <span class="glyphicon"
+                              ng-class="{'glyphicon-collapse-up': collapsed, 'glyphicon-collapse-down': !collapsed}">
+                        </span>
                     </button>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default btn-xs" title="Priority up"
+                                ng-click="changePrio(1)" ng-disabled="item.Priority == 'Highest'">
+                            <span class="glyphicon glyphicon-open"></span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-xs" title="Priority down"
+                                ng-click="changePrio(-1)" ng-disabled="item.Priority == 'Paused'">
+                            <span class="glyphicon glyphicon-save"></span>
+                        </button>
+                    </div>
                     <button class="btn btn-danger btn-xs" type="button" title="Abort download of this file"
-                            ng-click="abort(item)">
+                            ng-click="abort()">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </td>
