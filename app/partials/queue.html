@@ -9,7 +9,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in queue | orderBy:['PriorityOrder','Filename']" ng-controller="QueueItemCtrl">
+            <tr ng-repeat="item in queue  | orderBy:'-PriorityOrder'  track by item.TTH "
+                ng-controller="QueueItemCtrl">
                 <td>
                     {{ item.Filename }}
                     <div collapse="!collapsed">
