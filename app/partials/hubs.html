@@ -12,13 +12,13 @@
         </alert>
         <div class="row" ng-show="hub.connected">
             <!-- User List -->
-            <ul class="user-list list-group"
-                ng-class="enlargedChat ? 'col-sm-1 col-sm-push-11' : 'col-sm-3 col-sm-push-9'">
+            <ul class="user-list list-group col-sm-3 col-sm-push-9" ng-hide="largeChat">
                 <li ng-repeat="user in users | orderBy:'NickOrder' " class="list-group-item" ng-controller="UserCtrl"
                     popover-title="{{ user.Description }}"
                     popover="IP: {{ user.IP || 'n/a' }}, Upload: {{ user.Connection || 'n/a' }}, Client: {{ user.Tag || 'n/a' }}"
-                    popover-trigger="mouseenter" popover-placement="left"
-                    ng-hide="enlargedChat">
+                    popover-trigger="mouseenter"
+                    popover-placement="left"
+                    ng-hide="largeChat">
                     <button class="btn btn-primary btn-xs pull-right" type="button"
                             title="Download {{ user.Nick }}'s filelist"
                             ng-click="downloadFilelist(user.Nick)"
@@ -27,31 +27,31 @@
                         {{ downloading && 'Downloading' || 'Browse' }}
                     </button>
                     <span class="badge">{{ user.Shared | numeraljs:'0.0 b' }}</span>
-                <span class="nick" style="color: {{ user.Nick | stringToColor }}">{{ user.Nick }}</span>
+                    <span class="nick" style="color: {{ user.Nick | stringToColor }}">{{ user.Nick }}</span>
                 </li>
-                <li class="list-group-item" ng-hide="enlargedChat">
+                <li class="list-group-item">
                     <button class="btn btn-danger btn-xs" type="button" title="Disconnect from this hub"
-                            ng-click="disconnect(hub.huburl)">
+                            ng-click="disconnect(hub.huburl)"
+                            ng-hide="largeChat">
                         <span class="glyphicon glyphicon-log-out"></span>
                         Disconnect
                     </button>
                     <button class="btn btn-default btn-xs pull-right" type="button" title="Enlarge chat"
-                            ng-click="enlargeChat()">
+                            ng-click="largeChat = !largeChat">
                         Enlarge chat
                         <span class="glyphicon glyphicon-triangle-right"></span>
                     </button>
                 </li>
-                <li class="list-group-item" ng-show="enlargedChat">
-                    <button class="btn btn-default btn-xs pull-right" type="button" title="Enlarge users"
-                            ng-click="enlargeUsers()">
-                        <span class="glyphicon glyphicon-triangle-left"></span>
-                    </button>
-                    &nbsp;
-                </li>
             </ul>
-            <div ng-class="enlargedChat ? 'col-sm-11 col-sm-pull-1' : 'col-sm-9 col-sm-pull-3'">
+            <div ng-class="largeChat ? 'col-sm-12' : 'col-sm-9 col-sm-pull-3'">
                 <!-- Chat Log -->
                 <div class="row">
+                    <div class="fix-top-right" ng-show="largeChat">
+                        <button class="btn btn-default btn-xs" title="Show user list"
+                                ng-click="largeChat = !largeChat">
+                            <span class="glyphicon glyphicon-triangle-left"></span>
+                        </button>
+                    </div>
                     <ul class="chat col-sm-12" max-height="navbar nav-tabs" max-height-offset="12" scroll-glue>
                         <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index">
                             <span class="time">{{ message.time }}</span>

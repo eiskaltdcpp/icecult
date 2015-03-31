@@ -73,6 +73,20 @@ ul.chat {
     overflow: auto;
 }
 
+div.fix-top-right {
+    position: relative;
+}
+
+div.fix-top-right button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    margin-right: 16px;
+    cursor: pointer;
+    display: block;
+}
+
 ul.chat span.text {
     white-space: pre;
 }

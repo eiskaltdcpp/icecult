@@ -17,15 +17,6 @@ EiskaltApp.controller('HubsCtrl', function ($scope, EiskaltRPC) {
     $scope.disconnect = function (huburl) {
         EiskaltRPC.HubDel(huburl).success(loadHubs);
     };
-
-    $scope.enlargedChat = false;
-    $scope.enlargeChat = function () {
-        $scope.enlargedChat = true;
-    };
-
-    $scope.enlargeUsers = function () {
-        $scope.enlargedChat = false;
-    };
 });
 
 EiskaltApp.controller('HubCtrl', function ($scope, $interval, $localStorage, settings, EiskaltRPC) {
