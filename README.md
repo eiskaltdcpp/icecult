@@ -28,6 +28,11 @@ Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
 
 Changelog
 ---------
+* 0.6.0:
+  * feature: desktop notifications for chat messages [#18](/../../issues/18)
+  * feature: priorities for download queue [#17](/../../issues/17) / [#19](/../../issues/19)
+  * feature: store enlargeable chat state [#20](/../../issues/20)
+
 * 0.5.2:
   * feature: enlargeable chat [#15](/../../issues/15) / [#16](/../../issues/16) (thx [@mmrose](https://github.com/mmrose))
   * feature: improved ui: auto scaling chat size window, better tooltips in user list, responsive navigation
