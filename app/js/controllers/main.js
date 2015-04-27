@@ -1,7 +1,10 @@
 'use strict';
 
 EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settings, EiskaltRPC, UpdateCheck) {
-    $scope.navbarCollapsed = true;
+    $scope.ui = {
+        largeChat: false,
+        navbarCollapsed: true
+    };
     $scope.ratio = {
         bandwidth_up: 0,
         bandwidth_down: 0
