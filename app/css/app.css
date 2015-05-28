@@ -89,6 +89,7 @@ div.fix-top-right button {
 
 ul.chat span.text {
     white-space: pre;
+    word-wrap: break-word;
 }
 
 ul.user-list .badge {
