@@ -58,7 +58,7 @@
                         <li ng-repeat="message in $storage.chatlog[hub.huburl] track by $index">
                             <span class="time">{{ message.time }}</span>
                             <span class="nick" style="color: {{ message.nick | stringToColor }}">&lt;{{ message.nick }}&gt;</span>
-                            <span class="text">{{ message.text }}</span>
+                            <span class="text" ng-bind-html="message.text | linky:'_blank'"></span>
                         </li>
                     </ul>
                 </div>
