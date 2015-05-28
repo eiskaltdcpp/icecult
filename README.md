@@ -28,6 +28,10 @@ Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
 
 Changelog
 ---------
+* 0.6.1:
+  * feature: wrap long chat messages [#21](/../../issues/21)
+  * feature: render urls in chat messages as links [#22](/../../issues/22)
+
 * 0.6.0:
   * feature: desktop notifications for chat messages [#18](/../../issues/18)
   * feature: priorities for download queue [#17](/../../issues/17) / [#19](/../../issues/19)
