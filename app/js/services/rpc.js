@@ -232,7 +232,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http, $q) {
                         nodes.push({
                             label: key,
                             target: directory + key,
-                            isFolder: value.Name.indexOf('d') == 0,
+                            isFolder: !value.hasOwnProperty('TTH'),
                             data: value});
                     });
                     fn(nodes);
