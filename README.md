@@ -28,6 +28,9 @@ Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
 
 Changelog
 ---------
+* upcoming:
+  * bugfix: download of single files starting with "d"
+
 * 0.6.1:
   * feature: wrap long chat messages [#21](/../../issues/21)
   * feature: render urls in chat messages as links [#22](/../../issues/22)
