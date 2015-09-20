@@ -28,7 +28,7 @@ Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
 
 Changelog
 ---------
-* upcoming:
+* 0.6.2:
   * bugfix: download of single files starting with "d"
   * bugfix: be more tolerant with hub's chat time formats
 
