@@ -30,7 +30,7 @@ Changelog
 ---------
 * 0.6.2:
   * bugfix: download of single files starting with "d"
-  * bugfix: be more tolerant with hub's chat time formats
+  * bugfix: be more tolerant with hub's chat time formats [#23](/../../issues/23)
 
 * 0.6.1:
   * feature: wrap long chat messages [#21](/../../issues/21)
