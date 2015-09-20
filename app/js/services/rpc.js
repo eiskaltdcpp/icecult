@@ -100,7 +100,7 @@ angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http, $q) {
             var promise = deferred.promise;
             jsonrpc('hub.getchat', {huburl: huburl, separator: '┴'}, true).success(function(messages) {
                 deferred.resolve(messages.map(function(msg) {
-                    var match = msg.match(/^\s*(\[[^\]]*\])\s*<\s*([^\s>]*)\s*>\s*([^\s]*)\s*$/);
+                    var match = msg.match(/^\s*(\[[^\]]*\])\s*<\s*([^\s>]*)\s*>\s*(.*)\s*$/);
                     return {
                         time: match[1],
                         nick: match[2],
