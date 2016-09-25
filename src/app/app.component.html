@@ -1,15 +1,20 @@
 <header>
   <nav>
-    <a [routerLink]="['']">Home</a>
-    <a [routerLink]="['about']">About</a>
+    <a [routerLink]="['hubs']">
+      <md-icon>home</md-icon> Hubs
+    </a>
+    <a [routerLink]="['downloads']">
+      <md-icon>cloud_download</md-icon> Downloads
+    </a>
+    <a [routerLink]="['browse']">
+      <md-icon>folder_shared</md-icon> Browse
+    </a>
+    <a [routerLink]="['settings']">
+      <md-icon>settings</md-icon> Settings
+    </a>
   </nav>
 </header>
 <main>
-  <h1>Hello from {{api.title}}!</h1>
-
-  <!-- Images (and assets) are parsed and loaded from within the public directory -->
-  <img src="/img/angular.png">
-
   <router-outlet></router-outlet>
 </main>
 <footer>

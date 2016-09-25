@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var isProd = process.env.npm_lifecycle_event === 'build';
@@ -13,7 +12,7 @@ module.exports = {
   },
   devtool: isProd ? 'source-map' : 'eval-source-map',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve('./dist'),
     publicPath: '/',
     filename: '[name].bundle.js',
     sourceMapFilename: '[name].map',
@@ -21,28 +20,16 @@ module.exports = {
   },
   resolve: {
     modules: [path.resolve(__dirname, 'src', 'app'), 'node_modules'],
-    extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
+    extensions: ['.ts', '.js', '.json', '.css', '.html'],
   },
   module: {
     loaders: [
-      { test: /\.ts$/, loader: 'awesome-typescript-loader' },
-      { test: /\.html$/, loader: 'html-loader' },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract({
-        fallbackLoader: 'style-loader',
-        loader: [
-          { loader: 'css-loader?sourceMap' },
-          { loader: 'sass-loader?sourceMap' },
-        ]
-      })},
+      { test: /\.ts$/, loader: ['awesome-typescript', 'angular2-template'] },
+      { test: /\.html$/, loader: 'html' },
+      { test: /\.css$/, loader: ['style', 'css'], exclude: path.resolve('./src/app')},
+      { test: /\.css$/, loader: 'raw', include: path.resolve('./src/app') },
+      { test: /\.woff2?$|\.ttf$|\.eot$/, loader: 'file' }
     ],
-    // preLoaders: [
-    //   { test: /\.js$/, loader: 'source-map-loader', exclude: [
-    //     // these packages have problems with their sourcemaps
-    //     path.join(__dirname, 'node_modules', 'rxjs'),
-    //     path.join(__dirname, 'node_modules', '@angular2-material'),
-    //     path.join(__dirname, 'node_modules', '@angular', 'compiler'),
-    //   ]
-    // }],
     noParse: [/.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/, /angular2-polyfills\.js/]
   },
   plugins: [
@@ -67,12 +54,13 @@ module.exports = {
   ].concat(!isProd ? [] : [
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin(),
-    // new CopyWebpackPlugin([{from: './src/public'}]) // TODO: figure out for prod builds later
+    // new CopyWebpackPlugin([{from: './src/public'}]) // TODO: figure out what's needed for prod builds later
   ]),
   devServer: {
     contentBase: './dist',
     publicPath: '/',
     host: '0.0.0.0',
-    stats: 'minimal'
+    stats: 'minimal',
+    historyApiFallback: true
   }
 };

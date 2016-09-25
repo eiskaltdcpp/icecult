@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ice-about',
-  template: require('./about.component.html'),
-  // styles: [require('./about.component.scss')],
+  templateUrl: './about.component.html',
+  styleUrls: ['./about.component.css'],
 })
 export class AboutComponent implements OnInit {
 

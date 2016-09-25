@@ -7,7 +7,9 @@ import '@angular/http';
 import '@angular/router';
 
 // RxJS
-import 'rxjs';
+import 'rxjs/add/operator/map';
 
-// Other vendors for example jQuery, Lodash or Bootstrap
-// You can import js, ts, css, sass, ...
+// for material2
+import 'hammerjs';
+import 'material-design-icons/iconfont/material-icons.css';
+import '@angular2-material/core/overlay/overlay.css';

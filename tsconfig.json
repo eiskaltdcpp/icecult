@@ -1,4 +1,8 @@
 {
+  "types": [
+    "jasmine",
+    "hammerjs"
+  ],
   "compilerOptions": {
     "target": "es5",
     "emitDecoratorMetadata": true,

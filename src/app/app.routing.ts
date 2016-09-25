@@ -1,11 +1,12 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home';
+import { HubListComponent } from './hubs';
 import { AboutComponent } from './about';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/hubs', pathMatch: 'full'},
+  { path: 'hubs', component: HubListComponent },
   { path: 'about', component: AboutComponent}
 ];
 
