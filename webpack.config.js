@@ -66,9 +66,8 @@ module.exports = {
     })
   ].concat(!isProd ? [] : [
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
-    new CopyWebpackPlugin([{from: './src/public'}])
+    // new CopyWebpackPlugin([{from: './src/public'}]) // TODO: figure out for prod builds later
   ]),
   devServer: {
     contentBase: './dist',
