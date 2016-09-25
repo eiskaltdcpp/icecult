@@ -11,10 +11,10 @@ export class HubListComponent implements OnInit {
 
   constructor(
     private api: ApiService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    console.log(this.api.title);
+
   }
 
 }

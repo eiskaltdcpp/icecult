@@ -61,6 +61,9 @@ module.exports = {
     publicPath: '/',
     host: '0.0.0.0',
     stats: 'minimal',
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      '/rpc': 'http://bananapi:81',
+    }
   }
 };
