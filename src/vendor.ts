@@ -7,7 +7,7 @@ import '@angular/http';
 import '@angular/router';
 
 // RxJS
-import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 // for material2
 import 'hammerjs';

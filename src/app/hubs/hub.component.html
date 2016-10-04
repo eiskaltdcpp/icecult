@@ -1,0 +1,7 @@
+{{hub.name}}
+
+<ul id="users">
+    <li *ngFor="let user of users$ | async; trackBy:user?.cid" >
+        {{ user.nick }}
+    </li>
+</ul>

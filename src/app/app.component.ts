@@ -1,5 +1,8 @@
-import { ApiService } from './shared';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+
+import { ApiService } from './shared';
+
 
 @Component({
   selector: 'ice-app',
@@ -8,11 +11,11 @@ import { Component, OnInit } from '@angular/core';
   providers: [ApiService]
 })
 export class AppComponent implements OnInit{
-  private version: String;
+  private version$: Observable<String>;
 
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-    this.api.showVersion().subscribe((version: String) => this.version = version);
+    this.version$ = this.api.showVersion();
   }
 }

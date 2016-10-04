@@ -1,4 +1,5 @@
-<header>
+<md-toolbar>
+  <span title="{{ version$ | async }}">EiskaltDC++</span>
   <nav>
     <a [routerLink]="['hubs']">
       <md-icon>home</md-icon> Hubs
@@ -13,10 +14,7 @@
       <md-icon>settings</md-icon> Settings
     </a>
   </nav>
-</header>
+</md-toolbar>
 <main>
   <router-outlet></router-outlet>
 </main>
-<footer>
-  EiskaltDC Version: {{version}}
-</footer>
