@@ -1,8 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { List } from 'immutable';
+import { Component, Input } from '@angular/core';
 
-import { ApiService, Hub, User} from '../shared';
+import { ApiService, Hub} from '../shared';
 
 
 @Component({
@@ -11,16 +9,6 @@ import { ApiService, Hub, User} from '../shared';
   templateUrl: './hub.component.html',
   styleUrls: ['./hub.component.css']
 })
-export class HubComponent implements OnInit {
+export class HubComponent {
   @Input() hub: Hub;
-  users$: Observable<List<User>>;
-
-  constructor(
-    private api: ApiService
-  ) { }
-
-  ngOnInit() {
-    this.users$ = this.api.hubUsers(this.hub);
-  }
-
 }

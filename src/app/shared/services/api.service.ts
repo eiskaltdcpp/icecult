@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
 import * as Immutable from 'immutable';
 
-import { config } from '../config';
-import { Hub, User, Message } from './index';
+import { config } from '../../config';
+import { Hub, User, Message } from '../index';
 
 @Injectable()
 export class ApiService {
@@ -57,7 +57,7 @@ export class ApiService {
         hub.name = result[key].hubname;
         hub.description = result[key].description;
         hub.share = result[key].totalshare;
-        hub.users = result[key].users;
+        hub.users$ = this.hubUsers(hub);
         return hub;
       }))
       .map(hubs => List.of(...hubs))

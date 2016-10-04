@@ -1,4 +1,7 @@
-import { hashCode } from '../index';
+import { Observable } from 'rxjs/Rx';
+import { List } from 'immutable';
+
+import { hashCode, User } from '../index';
 
 
 export class Hub {
@@ -6,7 +9,7 @@ export class Hub {
   name: String;
   description: String;
   share: Number;
-  users: Number;
+  users$: Observable<List<User>>;
 
   equals(other: Hub): boolean {
     return this.url === other.url;
