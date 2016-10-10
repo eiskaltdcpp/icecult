@@ -5,9 +5,9 @@ import { hashCode, User } from '../index';
 
 
 export class Hub {
-  url: String;
-  name: String;
-  description: String;
+  url: string;
+  name: string;
+  description: string;
   share: Number;
   users$: Observable<List<User>>;
 

@@ -1,7 +1,7 @@
 
 
-export class Message {
-  time: String;
-  nick: String;
-  text: String;
+export interface Message {
+  time: string;
+  nick: string;
+  text: string;
 }

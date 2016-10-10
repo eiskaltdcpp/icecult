@@ -5,4 +5,4 @@ export const config = {
     users: 5000,
     chat: 3000
   }
-}
+};

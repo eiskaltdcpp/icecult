@@ -2,16 +2,16 @@ import { hashCode } from '../index';
 
 
 export class User {
-  cid: String;
-  connection: String;
-  description: String;
-  ip: String;
-  icon: String;
-  nick: String;
-  nickOrder: String;
+  cid: string;
+  connection: string;
+  description: string;
+  ip: string;
+  icon: string;
+  nick: string;
+  nickOrder: string;
   shared: Number;
-  tag: String;
-  email: String;
+  tag: string;
+  email: string;
 
   equals(other: User): boolean {
     return this.cid === other.cid;

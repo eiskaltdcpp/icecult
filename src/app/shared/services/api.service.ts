@@ -91,21 +91,19 @@ export class ApiService {
   }
 
   hubChat(hub: Hub): Observable<Message> {
-    console.log('hubChat');
     return Observable.interval(config.api.chat).startWith(0)
       .concatMap(() => {
-        console.log('hub.getchat');
         return this.jsonRPC('hub.getchat', { huburl: hub.url, separator: this.DEFAULT_SEPARATOR }, true);
       })
       .filter((messages: String[]) => messages.length > 0)
       .concatMap((messages: String[]) => Observable.from(messages))
       .map((rawText: String) => {
         let match = rawText.match(/^\s*(\[[^\]]*\])\s*<\s*([^\s>]*)\s*>\s*(.*)\s*$/);
-        let message = new Message();
-        message.time = match[0];
-        message.nick = match[1];
-        message.text = match[2];
-        return message;
+        return {
+          time: match[1],
+          nick: match[2],
+          text: match[3]
+        };
       });
   }
 }

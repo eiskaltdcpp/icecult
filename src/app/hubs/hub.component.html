@@ -5,3 +5,9 @@
         {{ user.nick }}
     </li>
 </ul>
+
+<ul id="chat">
+    <li *ngFor="let message of messages[hub.name]" >
+        {{ message.time }} - {{ message.nick }} - {{ message.text }}
+    </li>
+</ul>
