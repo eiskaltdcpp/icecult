@@ -95,7 +95,7 @@ export class ApiService {
     return Observable.interval(config.api.chat).startWith(0)
       .concatMap(() => {
         console.log('hub.getchat');
-        return this.jsonRPC('hub.getchat', { huburl: hub.url, separator: this.DEFAULT_SEPARATOR }, true)
+        return this.jsonRPC('hub.getchat', { huburl: hub.url, separator: this.DEFAULT_SEPARATOR }, true);
       })
       .filter((messages: String[]) => messages.length > 0)
       .concatMap((messages: String[]) => Observable.from(messages))
