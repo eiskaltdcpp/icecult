@@ -7,7 +7,7 @@
 </ul>
 
 <ul id="chat">
-    <li *ngFor="let message of messages[hub.name]" >
+    <li *ngFor="let message of hub.messages$ | async" >
         {{ message.time }} - {{ message.nick }} - {{ message.text }}
     </li>
 </ul>

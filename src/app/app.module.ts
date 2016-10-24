@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
-import { LocalStorageService } from 'angular2-localstorage/LocalStorageEmitter';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { HubListComponent, HubComponent } from './hubs';
+import { ApiService } from './shared/services/api.service';
+import { StorageService } from './shared/services/storage.service';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HubListComponent, HubComponent } from './hubs';
     MaterialModule.forRoot()
   ],
   providers: [
-    LocalStorageService
+    StorageService,
+    ApiService
   ]
 })
 export class AppModule {}

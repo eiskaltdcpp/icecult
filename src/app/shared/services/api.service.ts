@@ -5,13 +5,18 @@ import { List } from 'immutable';
 import * as Immutable from 'immutable';
 
 import { config } from '../../config';
-import { Hub, User, Message } from '../index';
+import { Hub, User, Message } from '..';
+import { StorageService } from '../services/storage.service';
+
 
 @Injectable()
 export class ApiService {
   private DEFAULT_SEPARATOR: String = '┴';
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private storage: StorageService
+  ) { }
 
   private jsonRPC(method: String, parameters?: any, isSeperatedList?: Boolean): Observable<any> {
     return this.http.request(new Request(new RequestOptions({
@@ -51,16 +56,22 @@ export class ApiService {
   getHubs(): Observable<List<Hub>> {
     return Observable.interval(config.api.hubs).startWith(0)
       .concatMap(() => this.jsonRPC('hub.listfulldesc'))
-      .map(result => Object.keys(result).map(key => {
+      // convert to immutable
+      .map(result => List(Object.keys(result).map(key => {
         let hub = new Hub();
         hub.url = key;
         hub.name = result[key].hubname;
         hub.description = result[key].description;
         hub.share = result[key].totalshare;
+        return hub;
+      })))
+      // on
+      .distinct(Immutable.is)
+      .map((hubs: List<Hub>) => hubs.map(hub => {
         hub.users$ = this.hubUsers(hub);
+        hub.messages$ = this.hubMessages(hub);
         return hub;
       }))
-      .map(hubs => List.of(...hubs))
       .map(hubs => <List<Hub>>hubs.sortBy(hub => hub.name))
       .distinct(Immutable.is);
   }
@@ -90,8 +101,12 @@ export class ApiService {
       .distinct(Immutable.is);
   }
 
-  hubChat(hub: Hub): Observable<Message> {
-    return Observable.interval(config.api.chat).startWith(0)
+  hubMessages(hub: Hub): Observable<List<Message>> {
+    return Observable.merge(
+      // initially all from storage
+      Observable.from([this.storage.messages(hub)]),
+      // merged with periodically checked
+      Observable.interval(config.api.chat).startWith(0)
       .concatMap(() => {
         return this.jsonRPC('hub.getchat', { huburl: hub.url, separator: this.DEFAULT_SEPARATOR }, true);
       })
@@ -104,6 +119,8 @@ export class ApiService {
           nick: match[2],
           text: match[3]
         };
-      });
+      })
+      .map(message => this.storage.combinedMessages(hub, message))
+    );
   }
 }

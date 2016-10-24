@@ -1,29 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { LocalStorage } from 'angular2-localstorage';
-import { List } from 'immutable';
+import { Component, Input } from '@angular/core';
 
-import { ApiService, Hub, Message } from '../shared';
+import { Hub } from '../shared';
 
 
 @Component({
   selector: 'ice-hub',
-  providers: [ApiService],
+  providers: [],
   templateUrl: './hub.component.html',
   styleUrls: ['./hub.component.css']
 })
-export class HubComponent implements OnInit {
+export class HubComponent {
   @Input() hub: Hub;
-  @LocalStorage() messages: Object = {};
-
-  constructor(private api: ApiService) {}
-
-  ngOnInit() {
-    // this.messages = LocalStorage({ storageKey: `chatlog_${this.hub.name}` })(this.messages);
-    if (!this.messages.hasOwnProperty(this.hub.name)) {
-      this.messages[this.hub.name] = new Array<Message>();
-    }
-    this.api.hubChat(this.hub).subscribe(msg => {
-      this.messages[this.hub.name].push(msg);
-    });
-  }
 }

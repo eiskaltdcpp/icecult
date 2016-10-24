@@ -10,6 +10,4 @@ import '@angular/router';
 import 'rxjs/Rx';
 
 // for material2
-import 'hammerjs';
 import 'material-design-icons/iconfont/material-icons.css';
-import '@angular2-material/core/overlay/overlay.css';

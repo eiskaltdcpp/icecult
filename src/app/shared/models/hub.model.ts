@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
 
-import { hashCode, User } from '../index';
+import { hashCode, User, Message } from '..';
 
 
 export class Hub {
@@ -10,6 +10,7 @@ export class Hub {
   description: string;
   share: Number;
   users$: Observable<List<User>>;
+  messages$: Observable<List<Message>>;
 
   equals(other: Hub): boolean {
     return this.url === other.url;
