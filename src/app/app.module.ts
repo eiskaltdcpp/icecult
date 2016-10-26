@@ -3,17 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { routing } from './app.routing';
-import { HubListComponent, HubComponent } from './hubs';
+import { HubComponent } from './hub';
+import { ChatComponent } from './chat';
 import { ApiService } from './shared/services/api.service';
 import { StorageService } from './shared/services/storage.service';
 
 
 @NgModule({
   bootstrap: [AppComponent],
-  declarations: [AppComponent, HubListComponent, HubComponent],
+  declarations: [AppComponent, HubComponent, ChatComponent],
   imports: [
-    routing,
     BrowserModule,
     MaterialModule.forRoot()
   ],

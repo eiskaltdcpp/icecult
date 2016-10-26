@@ -1,3 +1,10 @@
+// Hack for Ubuntu on Windows: interface enumeration fails with EINVAL, so return empty.
+try {
+  require('os').networkInterfaces()
+} catch (e) {
+  require('os').networkInterfaces = () => ({})
+}
+
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -26,6 +33,7 @@ module.exports = {
     loaders: [
       { test: /\.ts$/, loader: ['awesome-typescript', 'angular2-template'] },
       { test: /\.html$/, loader: 'html' },
+      { test: /\.scss$/, loader: ['style', 'css?sourceMap', 'sass?sourceMap']},
       { test: /\.css$/, loader: ['style', 'css'], exclude: path.resolve('./src/app')},
       { test: /\.css$/, loader: 'raw', include: path.resolve('./src/app') },
       { test: /\.woff2?$|\.ttf$|\.eot$/, loader: 'file' }

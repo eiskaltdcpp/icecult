@@ -1,8 +1,0 @@
-<md-tab-group>
-  <md-tab *ngFor="let hub of hubs | async; trackBy: hub?.url">
-    <template md-tab-label>{{hub.name}}</template>
-    <template md-tab-content>
-      <ice-hub [hub]="hub"></ice-hub>
-    </template>
-  </md-tab>
-</md-tab-group>

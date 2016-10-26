@@ -13,3 +13,6 @@ import 'ts-helpers';
 
   require('zone.js/dist/long-stack-trace-zone');
 // }
+
+import '@angular/material/core/theming/prebuilt/pink-bluegrey.css';
+import './public/scss/global.scss';

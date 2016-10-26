@@ -1,0 +1,18 @@
+{{hub.name}}
+
+<ul id="users">
+    <li *ngFor="let user of hub.users$ | async; trackBy:user?.cid" >
+        {{ user.nick }}
+    </li>
+</ul>
+
+<md-tab-group>
+  <md-tab>
+    <template md-tab-label>
+      <md-icon>chat</md-icon> Chat
+    </template>
+    <template md-tab-content>
+      <ice-chat [hub]="hub"></ice-chat>
+    </template>
+  </md-tab>
+</md-tab-group>

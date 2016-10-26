@@ -1,20 +1,24 @@
-<md-toolbar>
-  <span title="{{ version$ | async }}">EiskaltDC++</span>
-  <nav>
-    <a [routerLink]="['hubs']">
-      <md-icon>home</md-icon> Hubs
-    </a>
-    <a [routerLink]="['downloads']">
-      <md-icon>cloud_download</md-icon> Downloads
-    </a>
-    <a [routerLink]="['browse']">
-      <md-icon>folder_shared</md-icon> Browse
-    </a>
-    <a [routerLink]="['settings']">
-      <md-icon>settings</md-icon> Settings
-    </a>
-  </nav>
-</md-toolbar>
-<main>
-  <router-outlet></router-outlet>
-</main>
+<md-sidenav-layout>
+  <md-sidenav #start (open)="closeStartButton.focus()">
+    Start Sidenav.
+    <br>
+    <ul>
+      <li *ngFor="let hub of hubs$ | async">
+        {{hub.name}}
+      </li>
+    </ul>
+    <br>
+    <md-icon>settings</md-icon> Settings
+    <button md-button #closeStartButton (click)="start.close()">Close</button>
+  </md-sidenav>
+
+  <md-toolbar color="primary">
+    <button md-icon-button (click)="start.open()">
+      <md-icon>menu</md-icon>
+    </button>
+    <span title="{{ version$ | async }}">EiskaltDC++</span>
+  </md-toolbar>
+  <main>
+      <ice-hub [hub]="currentHub" *ngIf="currentHub"></ice-hub>
+  </main>
+</md-sidenav-layout>
