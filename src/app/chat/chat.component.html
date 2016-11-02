@@ -1,8 +1,6 @@
 <ul id="chat">
     <li *ngFor="let message of hub.messages$ | async" >
-
         {{ message.time }}
-
         <span [style.color]="colorOfNick(message.nick)">
           {{ message.nick }}
         </span>:
