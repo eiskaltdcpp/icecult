@@ -20,7 +20,7 @@ export class ApiService {
 
   private jsonRPC(method: String, parameters?: any, isSeperatedList?: Boolean): Observable<any> {
     return this.http.request(new Request(new RequestOptions({
-      url: '/rpc/',
+      url: '/rpc/?' + method,
       method: RequestMethod.Post,
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -66,14 +66,14 @@ export class ApiService {
         return hub;
       })))
       // on
-      .distinct(Immutable.is)
+      .distinctUntilChanged(Immutable.is)
       .map((hubs: List<Hub>) => hubs.map(hub => {
         hub.users$ = this.hubUsers(hub);
         hub.messages$ = this.hubMessages(hub);
         return hub;
       }))
       .map(hubs => <List<Hub>>hubs.sortBy(hub => hub.name))
-      .distinct(Immutable.is);
+      .distinctUntilChanged(Immutable.is);
   }
 
   hubUsers(hub: Hub): Observable<List<User>> {
@@ -98,7 +98,7 @@ export class ApiService {
       })
       .map(users => List.of(...users))
       .map(users => <List<User>>users.sortBy(user => user.nickOrder))
-      .distinct(Immutable.is);
+      .distinctUntilChanged(Immutable.is);
   }
 
   hubMessages(hub: Hub): Observable<List<Message>> {
@@ -121,6 +121,11 @@ export class ApiService {
         };
       })
       .map(message => this.storage.combinedMessages(hub, message))
+      .share()
     );
+  }
+
+  sendMessage(hub: Hub, text: string) {
+    this.jsonRPC('hub.say', { huburl: hub.url, message: text }).subscribe();
   }
 }

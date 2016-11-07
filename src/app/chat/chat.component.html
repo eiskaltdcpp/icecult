@@ -1,4 +1,4 @@
-<ul id="chat">
+<ul id="chat" #chat [iceMaxHeight]="['#chat-input', 'md-toolbar', '.md-tab-header']">
     <li *ngFor="let message of hub.messages$ | async" >
         {{ message.time }}
         <span [style.color]="colorOfNick(message.nick)">
@@ -7,3 +7,8 @@
         {{ message.text }}
     </li>
 </ul>
+<div id="chat-input">
+  <md-input #chatInput placeholder="your message" (keyup.enter)="send()">
+    <md-icon md-prefix>chat_bubble_outline</md-icon>
+  </md-input>
+</div>

@@ -19,12 +19,12 @@ export class StorageService {
     }
   }
 
-  private set(key, value) {
+  private set(key, value): any {
     localStorage.setItem(key, JSON.stringify(value));
     return value;
   }
 
-  private get(key) {
+  private get(key): any {
     return Immutable.fromJS(JSON.parse(localStorage.getItem(key)));
   }
 
@@ -40,9 +40,9 @@ export class StorageService {
   }
 
   public combinedMessages(hub: Hub, newMessage: Message): List<Message> {
-    return this.set('messages', this.get('messages').set(
-      this.hubHash(hub),
-      this.messages(hub).push(newMessage)
-    ));
+    let map: Immutable.Map<String, List<Message>> = this.get('messages');
+    let combined = this.messages(hub).push(newMessage);
+    this.set('messages', map.set(this.hubHash(hub), combined));
+    return combined;
   }
 }

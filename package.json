@@ -5,9 +5,8 @@
   "scripts": {
     "build": "rimraf dist && webpack --progress --profile --bail",
     "clean": "rimraf dist node_modules",
-    "dev": "webpack-dev-server --inline --progress --port 8080",
     "lint": "tslint --force \"src/**/*.ts\"",
-    "postinstall": "typings install"
+    "dev": "webpack-dev-server --inline --progress --profile --port 8080"
   },
   "devDependencies": {
     "@angular/common": "^2.1.2",
@@ -18,7 +17,13 @@
     "@angular/material": "^2.0.0-alpha.9-3",
     "@angular/platform-browser": "^2.1.2",
     "@angular/platform-browser-dynamic": "^2.1.2",
+    "@types/chai": "^3.4.34",
+    "@types/es6-collections": "^0.5.29",
+    "@types/es6-promise": "0.0.32",
     "@types/hammerjs": "^2.0.33",
+    "@types/immutable": "^3.8.4",
+    "@types/node": "^6.0.46",
+    "@types/numeral": "0.0.18",
     "angular2-template-loader": "^0.6.0",
     "autoprefixer": "^6.5.1",
     "awesome-typescript-loader": "^2.2.4",
@@ -35,11 +40,13 @@
     "material-design-icons": "^3.0.1",
     "node-sass": "^3.10.1",
     "null-loader": "0.1.1",
+    "numeral": "^1.5.3",
     "postcss-loader": "^1.1.0",
     "raw-loader": "0.5.1",
     "reflect-metadata": "^0.1.8",
     "rimraf": "^2.5.4",
     "rxjs": "^5.0.0-rc.1",
+    "sass-loader": "^4.0.2",
     "shelljs": "^0.7.5",
     "style-loader": "^0.13.1",
     "ts-helpers": "^1.1.2",
@@ -47,13 +54,9 @@
     "tslint": "^3.15.1",
     "tslint-loader": "^2.1.5",
     "typescript": "^2.0.6",
-    "typings": "^1.5.0",
     "url-loader": "^0.5.7",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.5",
     "zone.js": "^0.6.26"
-  },
-  "dependencies": {
-    "sass-loader": "^4.0.2"
   }
 }

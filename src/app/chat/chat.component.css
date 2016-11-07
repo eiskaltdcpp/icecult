@@ -1,0 +1,19 @@
+ul#chat {
+  margin: 0;
+  overflow-y: auto;
+  list-style: none;
+  /*padding: 5px;*/
+}
+
+div#chat-input {
+   height: 67px;
+   padding: 0 25px;
+}
+
+div#chat-input md-input {
+   width: 95%;
+}
+
+/*:host >>> div#chat-input .md-input-wrapper {
+  margin-bottom: 0;
+}*/

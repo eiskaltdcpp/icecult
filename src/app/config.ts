@@ -1,8 +1,8 @@
 
 export const config = {
   api: {
-    hubs: 5000,
-    users: 5000,
+    hubs: 10000,
+    users: 10000,
     chat: 3000
   },
   storage: {

@@ -1,0 +1,9 @@
+<ul id="users">
+  <li *ngFor="let user of hub.users$ | async; trackBy:user?.cid">
+    {{ user.nick }}
+    ({{ user.shared | iceNumeral:'0.0 b' }})
+    <button md-icon-button>
+      <md-icon class="md-24">folder_shared</md-icon>
+    </button>
+  </li>
+</ul>

@@ -68,10 +68,10 @@ module.exports = {
     contentBase: './dist',
     publicPath: '/',
     host: '0.0.0.0',
-    stats: 'minimal',
-    historyApiFallback: true,
+    stats: { colors: true },
+    //historyApiFallback: true,
     proxy: {
-      '/rpc': 'http://bananapi:81',
+      '/rpc': 'http://192.168.1.201:81',
     }
   }
 };
