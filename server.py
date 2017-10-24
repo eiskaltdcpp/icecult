@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 """
+Copyright (c) 2015 Lars Kreisz
+License: The MIT License (MIT)
+--
+
 This script needs "python-twisted" installed.
 It's usefull for 2 use cases:
 
