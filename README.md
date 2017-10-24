@@ -28,7 +28,15 @@ License
 
 Setup
 -----
-Look up [this wiki page](/../../wiki).
+* Look up [this wiki page](/../../wiki).
+
+Contribution
+------------
+* Patches are welcome!
+* If you need to add extra library, then:
+  * check the license of that library very carefully
+  * check if that library is actively maintained (for fixing possible bugs in it)
+  * try to find a usual CDN server hosting the file and only if you can't find one, copy source version of javascript file into this repo
 
 Changelog
 ---------
