@@ -1,3 +1,6 @@
+/* Copyright (c) 2017 Lars Kreisz */
+/* License:The MIT License (MIT) */
+
 var EiskaltFilters = angular.module('EiskaltFilters', []);
 
 EiskaltFilters.filter('numeraljs', function () {

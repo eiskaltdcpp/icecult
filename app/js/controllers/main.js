@@ -1,3 +1,6 @@
+/* Copyright (c) 2017 Lars Kreisz */
+/* License:The MIT License (MIT) */
+
 'use strict';
 
 EiskaltApp.controller('MainCtrl', function ($scope, $location, $interval, settings, EiskaltRPC, UpdateCheck) {

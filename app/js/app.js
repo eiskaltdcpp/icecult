@@ -1,3 +1,6 @@
+/* Copyright (c) 2017 Lars Kreisz */
+/* License:The MIT License (MIT) */
+
 'use strict';
 
 var EiskaltApp = angular.module('EiskaltApp', ['ngRoute', 'ngStorage', 'ngSanitize', 'luegg.directives', 'ui.bootstrap',

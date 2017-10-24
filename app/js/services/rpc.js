@@ -1,3 +1,6 @@
+/* Copyright (c) 2017 Lars Kreisz */
+/* License:The MIT License (MIT) */
+
 'use strict';
 
 angular.module('EiskaltRPC', []).factory('EiskaltRPC', function($http, $q) {

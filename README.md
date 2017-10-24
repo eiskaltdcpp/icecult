@@ -1,6 +1,7 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 icecult
 =======
-
 Alternative webinterface for [eiskaltdcpp-daemon](https://github.com/eiskaltdcpp/eiskaltdcpp).
 
 Features:
@@ -16,15 +17,18 @@ Planned:
 
 Screenshots
 -----------
+* Hubs: ![Hubs](https://raw.github.com/eiskaltdcpp/icecult/master/screens/icecult_hubs.png)
+* Browse: ![Browse](https://raw.github.com/eiskaltdcpp/icecult/master/screens/icecult_browse.png)
+* Queue: ![Queue](https://raw.github.com/eiskaltdcpp/icecult/master/screens/icecult_queue.png)
 
-* Hubs: ![Hubs](https://raw.github.com/kraiz/icecult/master/screens/icecult_hubs.png)
-* Browse: ![Browse](https://raw.github.com/kraiz/icecult/master/screens/icecult_browse.png)
-* Queue: ![Queue](https://raw.github.com/kraiz/icecult/master/screens/icecult_queue.png)
+License
+-------
+* [MIT license](/../../blob/master/LICENSE)
+* Some 3rd-party libraries [here](/../../tree/master/app/libs) licensed under MIT, too
 
 Setup
 -----
-
-Look up [this wiki page](https://github.com/kraiz/icecult/wiki).
+Look up [this wiki page](/../../wiki).
 
 Changelog
 ---------

@@ -1,3 +1,6 @@
+/* Copyright (c) 2017 Lars Kreisz */
+/* License:The MIT License (MIT) */
+
 angular.module('EiskaltDirectives', [])
     .directive('maxHeight', function ($window, $timeout) {
         return {

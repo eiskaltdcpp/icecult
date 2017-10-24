@@ -1,4 +1,7 @@
-(function() {
+/* Copyright (c) 2013 Nick Perkins */
+/* License: The MIT License (MIT) */
+
+(function () {
   var module;
 
   module = angular.module('angularBootstrapNavTree', []);
