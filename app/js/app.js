@@ -16,7 +16,8 @@ EiskaltApp.value('settings', {
     refresh: {
         hashAndRatio: 5000,
         chat: 3000,
-        queues: 5000
+        queues: 5000,
+        search: 3000,
     },
     settings: [
         {key: 'Nick', type: 'text'},
@@ -38,6 +39,10 @@ EiskaltApp.config(function ($routeProvider) {
         .when('/browse', {
             controller: 'BrowseCtrl',
             templateUrl: 'partials/browse.html'
+        })
+        .when('/search', {
+            controller: 'SearchCtrl',
+            templateUrl: 'partials/search.html'
         })
         .when('/queue', {
             controller: 'QueueCtrl',

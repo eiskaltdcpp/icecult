@@ -1,0 +1,58 @@
+<div id="search">
+    <div id="hubSelection" class="form-horizontal">
+        Hub:
+        <select ng-model="hub" ng-options="h.huburl for h in hubs"></select>
+    </div>
+    <form class="form-inline" ng-model-options="{ updateOn: 'blur' }" id="searchBar">
+        <input id="searchText" type="text" class="form-control" ng-model="term" width="100%">
+        <button type="submit" class="btn btn-primary btn-xs" ng-click="search()">
+            <span class="glyphicon" ng-class="glyphicon-search"></span>
+            Search
+        </button>
+    </form>
+    <div id="output" class="table-responsive">
+        <table class="table table-striped table-hover table-condensed" id="searchResults">
+            <thead>
+                <tr>
+                    <th class="name-cell">Filename</th>
+                    <th class="path-cell">Path</th>
+                    <th class="host-cell">Nick</th>
+                    <th class="size-cell">Size</th>
+                    <th class="button-cell"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in result track by $index ">
+                    <td>
+                        {{ item.Filename }}
+                    </td>
+                    <td>
+                        {{ item.Path }}
+                    </td>
+                    <td>
+                        {{ item.Nick }}
+                    </td>
+                    <td>
+                        {{ item.Size }}
+                    </td>
+                    <td ng-controller="SearchDownloadCtrl" ng-init="init(item)">
+                        <button type="button" class="btn btn-primary btn-xs pull-right"
+                            ng-click="downloadFileList(item)"
+                            ng-disabled="downloadedFileList">
+                            <span class="glyphicon"
+                                  ng-class="downloaded ? 'glyphicon-ok' : 'glyphicon-download-alt'"></span>
+                            Download Filelist
+                        </button>
+                        <button type="button" class="btn btn-primary btn-xs pull-right"
+                            ng-click="download(item)"
+                            ng-disabled="nonDownloadableFile">
+                            <span class="glyphicon"
+                                  ng-class="downloaded ? 'glyphicon-ok' : 'glyphicon-download-alt'"></span>
+                            Download
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
